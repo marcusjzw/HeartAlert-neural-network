@@ -27,6 +27,8 @@ Stuff to help improve accuracy:
 - Different activation functions other then relu
 - Using all data (time domain, non-linear and frequency domain)
 
+- K-fold cross validation to ensure accuracy
+
 # COMPSYS700: Setup
 
 The wfdb software package is required to run any python scripts that extract information from Physionet datasets. This is a standalone command line package, MATLAB package or Python package.
