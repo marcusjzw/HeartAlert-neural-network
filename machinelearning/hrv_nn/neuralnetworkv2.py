@@ -1,7 +1,9 @@
 from keras.models import Sequential
+from keras.models import load_model
+from keras.models import model_from_json
 from keras.layers import Dense
 import numpy
-
+import json
 # v2 of the neural network takes feedback from k-fold cross validation, to produce the best neuron config - i.e. 16 first layer, 12 second layer
 # This provides both the highest accuracy of all configurations tested, and the lowest averaged standard deviation across all folds (which hints 
 # that there is no under or overfitting)
@@ -34,4 +36,16 @@ model.fit(inputs, outputs, epochs = 1000, batch_size=5)
 # evaluation of model
 scores = model.evaluate(inputs, outputs)
 print("\n %s: %.2f%%" % (model.metrics_names[1], scores[1]*100))
+
+# save model (complete)
+model.save('vt_classification_model_complete.h5')
+# save model architecture only
+json_string = model.to_json()
+with open('vt_classification_model_architecture.txt', 'w+') as outfile:
+    json.dump(json_string, outfile)
+
+# save model weights only
+model.save_weights('vt_classification_model_weights.h5')
+
+
 
