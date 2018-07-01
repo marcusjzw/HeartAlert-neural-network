@@ -8,19 +8,22 @@ import json
 # v2 of the neural network takes feedback from k-fold cross validation, to produce the best neuron config - i.e. 16 first layer, 12 second layer
 # This provides both the highest accuracy of all configurations tested, and the lowest averaged standard deviation across all folds (which hints 
 # that there is no under or overfitting)
+
+# v3 separates training and testing data to test real life predictions with saved model. This file trains model and saves, neuralnetworkv3_test.py
+# will test on testing data. Training and testing data has been split from the all_data excel file.
 numpy.random.seed(7)
 
 # load dataset
-dataset = numpy.loadtxt("all_data.csv", delimiter = ",")
+dataset = numpy.loadtxt("training_data.csv", delimiter = ",")
 
 # split into input and output variables from splicing csv data
-inputs = dataset[:,1:5] # take the 4 input params (element 1 to 4)
-outputs = dataset[:,5] # one output, the outcome  
+inputs = dataset[:,0:4] # take the 4 input params (element 1 to 4)
+outputs = dataset[:,4] # one output, the outcome  
 # create model, add dense layers one by one specifying activation function
 model = Sequential() # defining layers left to right (input, hidden, output)
 # 'dense' = every neuron is connected to every other neuron in the next layer
 model.add(Dense(16, input_dim=4, activation='relu')) # 4 input dimensions
-model.add(Dense(16-4, activation='relu'))
+model.add(Dense(12, activation='relu'))
 # relu = squishing weights in between the 0 to 1 domain and passing to next layer. other methods: sigmoid, tanh
 model.add(Dense(1, activation='sigmoid')) # output layer, sigmoid for optimal shape to get 'definite' answer
 
@@ -34,7 +37,7 @@ model.compile(loss = "binary_crossentropy", optimizer="adam", metrics=['accuracy
 # adam = method for gradient descent, adam is an effective approximation
 
 # call function to fit to the data (Training the network)
-model.fit(inputs, outputs, epochs = 100, batch_size=5)
+model.fit(inputs, outputs, epochs = 1000, batch_size=5)
 # evaluation of model
 scores = model.evaluate(inputs, outputs)
 print("\n %s: %.2f%%" % (model.metrics_names[1], scores[1]*100))
@@ -48,11 +51,5 @@ with open('vt_classification_model_architecture.txt', 'w+') as outfile:
 
 # save model weights only
 model.save_weights('vt_classification_model_weights.h5')
-
-# try predictions
-predictions = model.predict(inputs)
-# round predictions (due to sigmoid as output layer)
-rounded_predictions = [round(inputs[0]) for inputs in predictions]
-print(rounded_predictions)
 
 
