@@ -1,0 +1,46 @@
+
+Hidden neurons: 10 
+Accuracy:  90.81% 
+SD: 2.58%
+Hidden neurons: 11 
+Accuracy:  77.88% 
+SD: 20.18%
+Hidden neurons: 12 
+Accuracy:  67.88% 
+SD: 24.73%
+Hidden neurons: 13 
+Accuracy:  79.99% 
+SD: 21.25%
+Hidden neurons: 14 
+Accuracy:  88.74% 
+SD: 2.77%
+Hidden neurons: 15 
+Accuracy:  66.86% 
+SD: 23.10%
+Hidden neurons: 16 
+Accuracy:  72.42% 
+SD: 19.72%
+Hidden neurons: 17 
+Accuracy:  66.06% 
+SD: 22.37%
+Hidden neurons: 18 
+Accuracy:  75.02% 
+SD: 19.24%
+Hidden neurons: 19 
+Accuracy:  76.93% 
+SD: 19.32%
+Hidden neurons: 20 
+Accuracy:  84.14% 
+SD: 8.06%
+Hidden neurons: 21 
+Accuracy:  66.45% 
+SD: 22.84%
+Hidden neurons: 22 
+Accuracy:  66.02% 
+SD: 22.22%
+Hidden neurons: 23 
+Accuracy:  64.85% 
+SD: 21.53%
+Hidden neurons: 24 
+Accuracy:  81.65% 
+SD: 22.17%
