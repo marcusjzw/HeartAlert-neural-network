@@ -40,7 +40,6 @@ print(np2)
 print("Sending HRV metrics to neural network...")
 model = load_model('/Users/Marcus/git/compsys700-new/machinelearning/hrv_nn/progress-after-2july/saved_models/vt_classification_model_complete75PERCENT.h5')
 prediction = model.predict_on_batch(np2)
-print("With a certainty value of %s: " % (prediction))
 if (round(prediction) == 1):
     print("The onset of ventricular tachycardia has been detected! ALERT")
 else:
