@@ -1,9 +1,9 @@
-# 1. Record number
-# 2. HF_POWER_LOMB, lomb periodogram analysis to get high frequency components from PSD
-# 3. LF_POWER_LOMB, same thing but for low frequency components
-# 4. LF_TO_HF_LOMB, ratio between the two
-# 5. VLF_POWER_LOMB, very low frequency components (tentative)
-# 6. Class variable/outcome, 0 is normal sinus rhythm and 1 is ventricular tachycardia
+# 1. Record number,,,,,
+# 2. HF_POWER_LOMB, lomb periodogram analysis to get high frequency components from PSD,,,,
+# 3. LF_POWER_LOMB, same thing but for low frequency components,,,,
+# 4. LF_TO_HF_LOMB, ratio between the two,,,,
+# 5. VLF_POWER_LOMB, very low frequency components (tentative),,,,
+# 6. Class variable/outcome, 0 is normal sinus rhythm and 1 is ventricular tachycardia,,,,
 0,151.7157804,373.3564443,2.460893938,1143.829579,0
 1,104.4187262,283.3400067,2.71349802,663.198761,0
 2,111.7591067,317.9837654,2.845260443,628.4876592,0

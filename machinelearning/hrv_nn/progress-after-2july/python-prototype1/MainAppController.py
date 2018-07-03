@@ -20,9 +20,6 @@ class MainAppController(object):
     
         # Bind buttons with callback methods
         self.view.one["command"] = self.nothing
-        self.view.two["command"] = self.nothing
-        self.view.three["command"] = self.nothing
-        self.view.four["command"] = self.nothing
 
         # Start the gui 
         self.view.start_gui()

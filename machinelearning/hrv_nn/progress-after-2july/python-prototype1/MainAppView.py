@@ -41,28 +41,17 @@ class MainAppView(tk.Frame):
         # Create the label
 
         self.title = tk.Label(
-                self, text = " What's up ?")
+                self, text = "Detecting Onset of Ventricular Tachycardia")
         self.title.grid(
             row=0, column=0,columnspan=4, sticky = tk.E+tk.W )
 
       
-        # Create the three buttons
+        # Create the button
 
         self.one = tk.Button(self)
-        self.one["text"] = "Task 1"
+        self.one["text"] = "Send to Neural Network"
         self.one.grid(row=1, column=0)
 
-        self.two = tk.Button(self)
-        self.two["text"] = "Task 2"
-        self.two.grid(row=1, column=1)
-     
-        self.three = tk.Button(self)
-        self.three["text"] = "Task 3"
-        self.three.grid(row=1, column=2)
-
-        self.four = tk.Button(self)
-        self.four["text"] = "Task 4"
-        self.four.grid(row=1, column=3)
 
 
 
