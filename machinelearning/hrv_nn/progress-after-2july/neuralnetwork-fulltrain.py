@@ -65,5 +65,6 @@ print("tn: %s" % tn)
 print("fp: %s" % fp)
 print("fn: %s" % fn)
 print("tp: %s" % tp)
+# best result: tn: 135, fp: 0, fn: 9, tp: 96 (acc: 96.25%)
 
 
