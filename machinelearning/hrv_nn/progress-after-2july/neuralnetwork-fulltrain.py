@@ -3,6 +3,7 @@ from keras.models import load_model
 from keras.models import model_from_json
 from keras.optimizers import SGD
 from keras.layers import Dense
+from sklearn.metrics import confusion_matrix
 import numpy
 import json
 # neural network takes feedback from k-fold cross validation, to produce the best neuron config
@@ -35,7 +36,7 @@ model.compile(loss = "binary_crossentropy", optimizer="adam", metrics=['accuracy
 # adam = method for gradient descent, adam is an effective approximation
 
 # call function to fit to the data (Training the network)
-model.fit(inputs, outputs, epochs = 1000, batch_size=5)
+model.fit(inputs, outputs, epochs = 10000, batch_size=5)
 # evaluation of model
 scores = model.evaluate(inputs, outputs)
 print("\n %s: %.2f%%" % (model.metrics_names[1], scores[1]*100))
@@ -54,6 +55,15 @@ model.save_weights('vt_classification_model_weights.h5')
 predictions = model.predict(inputs)
 # round predictions (due to sigmoid as output layer)
 rounded_predictions = [round(inputs[0]) for inputs in predictions]
+print(outputs)
 print(rounded_predictions)
+
+y_true = outputs
+y_pred = rounded_predictions
+tn, fp, fn, tp = confusion_matrix(y_true, y_pred).ravel()
+print("tn: %s" % tn)
+print("fp: %s" % fp)
+print("fn: %s" % fn)
+print("tp: %s" % tp)
 
 
