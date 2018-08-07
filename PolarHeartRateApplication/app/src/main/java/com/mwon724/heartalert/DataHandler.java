@@ -2,6 +2,8 @@ package com.mwon724.heartalert;
 
 import android.util.Log;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
 
 import com.androidplot.xy.SimpleXYSeries;
@@ -36,6 +38,9 @@ public class DataHandler extends Observable{
 	int rriVal = 0; //incoming HRM value
 	int min = 0;
 	int max = 0;
+	int totalValuesReceived = 0; // counts how many values have been sent by belt
+
+    List rriValuesList = new ArrayList<>();
 	
 	//for averaging
 	int data = 0;
@@ -60,9 +65,11 @@ public class DataHandler extends Observable{
 		}
 		pos++;
 	}
-	// assigns incoming HRM value + converts to RRI
+	// assigns incoming HRM value if not garbage + converts to RRI
 	public void cleanInput(int bpmVal){
 		rriVal = 60*1000/bpmVal;
+		totalValuesReceived++;
+		rriValuesList.add(rriVal);
         Log.i("DataHandler", "bpmVal converted  to RRI: " + rriVal);
 		if(rriVal != 0){
 			data += rriVal;
@@ -72,6 +79,8 @@ public class DataHandler extends Observable{
 			min = rriVal;
 		else if(rriVal > max)
 			max = rriVal;
+
+
 		setChanged(); // must call this before notifying observers, marks hasChanged() to true
 		notifyObservers(); // notify all observers, causing them to be notified by calling their update()
 	}
@@ -86,39 +95,34 @@ public class DataHandler extends Observable{
             return "Avg " + 0 + " ms";
 		return "Avg " + data/total + " ms";
 	}
-
-	public void setNewValue(boolean newValue) {
-		this.newValue = newValue;
-	}
-
+    public void setNewValue(boolean newValue) {this.newValue = newValue; }
 	public SimpleXYSeries getSeries1() {
 		return series1;
 	}
-
 	public void setSeries1(SimpleXYSeries series1) {
 		this.series1 = series1;
 	}
-
 	public ConnectThread getReader() {
 		return reader;
 	}
-
 	public void setReader(ConnectThread reader) {
 		this.reader = reader;
 	}
-
 	public int getID() {
 		return id;
 	}
 	public void setID(int id) {
 		this.id=id;
 	}
-
 	public void setH7(H7ConnectThread H7){
 		this.H7=H7;
 	}
 	public H7ConnectThread getH7(){
 		return H7;
 	}
+
+	// RRI Value List + Occurrence Tracking Getters/Setters
+    public int getTotalValuesReceived() { return totalValuesReceived;}
+    public List getRRIValuesList() { return rriValuesList;}
 	
 }

@@ -15,7 +15,8 @@
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/selectDevice" />
+        android:text="@string/selectDevice"
+        android:textAlignment="viewStart" />
 
     <Spinner
         android:id="@+id/deviceDropdown"
@@ -41,37 +42,14 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center">
 
-        <TextView
-            android:id="@+id/min"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/min" />
-
-        <TextView
-            android:id="@+id/avg"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/avg" />
-
-        <TextView
-            android:id="@+id/max"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/max" />
     </LinearLayout>
+
     <com.androidplot.xy.XYPlot
         android:id="@+id/dynamicPlot"
         title="Heart Rate"
         android:layout_width="wrap_content"
         android:layout_height="285dp"
-        android:layout_marginTop="10dp">
-    </com.androidplot.xy.XYPlot>
+        android:layout_marginTop="10dp"></com.androidplot.xy.XYPlot>
 
     <ScrollView
         android:id="@+id/rriScrollView"
@@ -81,13 +59,20 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/totalValuesView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Total Values: " />
 
             <TextView
                 android:id="@+id/textViewRRI"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Historical RRI Values..." />
+                android:text="RRI History:" />
+
         </LinearLayout>
     </ScrollView>
 

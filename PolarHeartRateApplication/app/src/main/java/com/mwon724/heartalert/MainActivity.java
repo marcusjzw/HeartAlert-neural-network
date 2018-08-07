@@ -20,6 +20,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -43,9 +44,8 @@ public class MainActivity extends Activity implements OnItemSelectedListener, Ob
     boolean h7 = false; //Was the BTLE tested
     boolean normal = false; //Was the BT tested
     private Spinner deviceDropdown;
-    private ScrollView scrollView;
-    List<Integer> rriList = new ArrayList<>();
-    TextView textViewRRI;
+    TextView totalValuesReceived;
+    TextView rriHistory;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -315,17 +315,11 @@ public class MainActivity extends Activity implements OnItemSelectedListener, Ob
                     plot.redraw();
                 }
 
-                TextView min = (TextView) findViewById(R.id.min);
-                min.setText(DataHandler.getInstance().getMin());
+                totalValuesReceived = (TextView) findViewById(R.id.totalValuesView);
+                totalValuesReceived.setText("Total Values: " + String.valueOf(DataHandler.getInstance().getTotalValuesReceived()));
 
-                TextView avg = (TextView) findViewById(R.id.avg);
-                avg.setText(DataHandler.getInstance().getAvg());
-
-                TextView max = (TextView) findViewById(R.id.max);
-                max.setText(DataHandler.getInstance().getMax());
-
-                textViewRRI = (TextView) findViewById(R.id.textViewRRI);
-                textViewRRI.append("\n" + String.valueOf(DataHandler.getInstance().getLastIntValue()));
+                rriHistory = (TextView) findViewById(R.id.textViewRRI);
+                rriHistory.append("\n" + String.valueOf(DataHandler.getInstance().getRRIValuesList()));
 
 
             }
