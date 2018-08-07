@@ -25,7 +25,7 @@ public class H7ConnectThread  extends Thread{
 	static BluetoothGattCharacteristic cc;
 	
 	public H7ConnectThread(BluetoothDevice device, MainActivity ac) {
-		Log.i("H7ConnectThread", "Starting H7 reader BTLE");
+		Log.i("H7ConnectThread", "Starting H7 reader BLE");
 		this.ac=ac;
 		gat = device.connectGatt(ac, false, btleGattCallback); // Connect to the device and store the server (gatt)
 	}
@@ -52,7 +52,7 @@ public class H7ConnectThread  extends Thread{
 	    	byte[] data = characteristic.getValue();
 	    	int bmp = data[1] & 0xFF; // To unsign the value
 	    	DataHandler.getInstance().cleanInput(bmp);
-			Log.v("H7ConnectThread", "Data received from HR "+bmp);
+			Log.v("H7ConnectThread", "Data received from HRM: "+ bmp);
 	    }
 	 
 		//called on the successful connection
@@ -60,7 +60,7 @@ public class H7ConnectThread  extends Thread{
 	    public void onConnectionStateChange(final BluetoothGatt gatt, final int status, final int newState) { 
 	    	if (newState ==  BluetoothGatt.STATE_DISCONNECTED)
 	    	{
-				Log.e("H7ConnectThread", "device Disconnected");
+				Log.e("H7ConnectThread", "device disconnected");
 				ac.connectionError();
 	    	}
 	    	else{

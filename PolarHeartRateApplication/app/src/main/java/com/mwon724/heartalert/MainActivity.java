@@ -18,7 +18,6 @@ import android.bluetooth.BluetoothDevice;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -32,15 +31,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.mwon724.heartalert.R;
-
-
-/**
- * This program connect to a bluetooth polar heart rate monitor and display data
- */
 public class MainActivity extends Activity implements OnItemSelectedListener, Observer {
 
-    private int MAX_SIZE = 60; //graph max size
+    private int MAX_SIZE = 120; //graph max size
     boolean searchBt = true;
     BluetoothAdapter mBluetoothAdapter;
     List<BluetoothDevice> pairedDevices = new ArrayList<>();
@@ -48,7 +41,7 @@ public class MainActivity extends Activity implements OnItemSelectedListener, Ob
     private XYPlot plot;
     boolean h7 = false; //Was the BTLE tested
     boolean normal = false; //Was the BT tested
-    private Spinner spinner1;
+    private Spinner deviceDropdown;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +53,7 @@ public class MainActivity extends Activity implements OnItemSelectedListener, Ob
         //Verify if device is to old for BTLE
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR2) {
 
-            Log.i("Main Activity", "old device H7 disbled");
+            Log.i("Main Activity", "Device SDK predates Bluetooth LE");
             h7 = true;
         }
 
@@ -177,15 +170,15 @@ public class MainActivity extends Activity implements OnItemSelectedListener, Ob
             }
 
             //Populate drop down
-            spinner1 = (Spinner) findViewById(R.id.spinner1);
+            deviceDropdown = (Spinner) findViewById(R.id.deviceDropdown);
             ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(this,
                     android.R.layout.simple_spinner_item, list);
             dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            spinner1.setOnItemSelectedListener(this);
-            spinner1.setAdapter(dataAdapter);
+            deviceDropdown.setOnItemSelectedListener(this);
+            deviceDropdown.setAdapter(dataAdapter);
 
-            if (DataHandler.getInstance().getID() != 0 && DataHandler.getInstance().getID() < spinner1.getCount())
-                spinner1.setSelection(DataHandler.getInstance().getID());
+            if (DataHandler.getInstance().getID() != 0 && DataHandler.getInstance().getID() < deviceDropdown.getCount())
+                deviceDropdown.setSelection(DataHandler.getInstance().getID());
         }
     }
 
@@ -198,8 +191,8 @@ public class MainActivity extends Activity implements OnItemSelectedListener, Ob
         if (id == R.id.action_settings) { //close connection
             menuBool = false;
             Log.d("Main Activity", "disable pressed");
-            if (spinner1 != null) {
-                spinner1.setSelection(0);
+            if (deviceDropdown != null) {
+                deviceDropdown.setSelection(0);
             }
             if (DataHandler.getInstance().getReader() == null) {
                 Log.i("Main Activity", "Disabling h7");
@@ -283,12 +276,11 @@ public class MainActivity extends Activity implements OnItemSelectedListener, Ob
                     Toast.makeText(getBaseContext(), getString(R.string.couldnotconnect), Toast.LENGTH_SHORT).show();
                     //TextView rpm = (TextView) findViewById(R.id.rpm);
                     //rpm.setText("0 BMP");
-                    Spinner spinner1 = (Spinner) findViewById(R.id.spinner1);
-                    if (DataHandler.getInstance().getID() < spinner1.getCount())
-                        spinner1.setSelection(DataHandler.getInstance().getID());
+                    Spinner deviceDropdown = (Spinner) findViewById(R.id.deviceDropdown);
+                    if (DataHandler.getInstance().getID() < deviceDropdown.getCount())
+                        deviceDropdown.setSelection(DataHandler.getInstance().getID());
 
                     if (!h7) {
-
                         Log.w("Main Activity", "starting H7 after error");
                         DataHandler.getInstance().setReader(null);
                         DataHandler.getInstance().setH7(new H7ConnectThread((BluetoothDevice) pairedDevices.toArray()[DataHandler.getInstance().getID() - 1], ac));
@@ -305,18 +297,8 @@ public class MainActivity extends Activity implements OnItemSelectedListener, Ob
         }
     }
 
+    // this is called when notifyListeners invoked. draws GUI based on DataHandler collected values
     public void update(Observable observable, Object data) {
-        receiveData();
-    }
-
-    /**
-     * Update Gui with new value from receiver
-     */
-    public void receiveData() {
-        //ANALYTIC
-        //t.setScreenName("Polar Bluetooth Used");
-        //t.send(new HitBuilders.AppViewBuilder().build());
-
         runOnUiThread(new Runnable() {
             public void run() {
                 //menuBool=true;
@@ -340,6 +322,14 @@ public class MainActivity extends Activity implements OnItemSelectedListener, Ob
                 max.setText(DataHandler.getInstance().getMax());
             }
         });
+        receiveData();
+    }
+
+    /**
+     * Update Gui with new value from receiver
+     */
+    public void receiveData() {
+
     }
 
     public void onStop() {
