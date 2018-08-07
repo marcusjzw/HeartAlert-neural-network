@@ -124,5 +124,7 @@ public class DataHandler extends Observable{
 	// RRI Value List + Occurrence Tracking Getters/Setters
     public int getTotalValuesReceived() { return totalValuesReceived;}
     public List getRRIValuesList() { return rriValuesList;}
+    public void clearTotalValuesReceived() {totalValuesReceived = 0;}
+    public void clearRRIValuesList() {rriValuesList.clear();}
 	
 }

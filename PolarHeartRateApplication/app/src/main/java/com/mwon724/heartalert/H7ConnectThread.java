@@ -10,6 +10,7 @@ import android.bluetooth.BluetoothGattCallback;
 import android.bluetooth.BluetoothGattCharacteristic;
 import android.bluetooth.BluetoothGattDescriptor;
 import android.bluetooth.BluetoothGattService;
+import android.provider.ContactsContract;
 import android.util.Log;
 
 /**
@@ -19,7 +20,7 @@ import android.util.Log;
 public class H7ConnectThread  extends Thread{
 	
 	MainActivity ac;	
-	private BluetoothGatt gat; //gat server
+	private BluetoothGatt gatt; //gatt server
 	private final String HRUUID = "0000180D-0000-1000-8000-00805F9B34FB";
 	static BluetoothGattDescriptor descriptor;
 	static BluetoothGattCharacteristic cc;
@@ -27,18 +28,18 @@ public class H7ConnectThread  extends Thread{
 	public H7ConnectThread(BluetoothDevice device, MainActivity ac) {
 		Log.i("H7ConnectThread", "Starting H7 reader BLE");
 		this.ac=ac;
-		gat = device.connectGatt(ac, false, btleGattCallback); // Connect to the device and store the server (gatt)
+		gatt = device.connectGatt(ac, false, btleGattCallback); // Connect to the device and store the server (gatt)
 	}
 
 	
 	/** Will cancel an in-progress connection, and close the socket */
 	public void cancel() {
-		gat.setCharacteristicNotification(cc,false);
+		gatt.setCharacteristicNotification(cc,false);
 		descriptor.setValue( BluetoothGattDescriptor.DISABLE_NOTIFICATION_VALUE);
-	    gat.writeDescriptor(descriptor);
+	    gatt.writeDescriptor(descriptor);
 		
-		gat.disconnect();
-		gat.close();
+		gatt.disconnect();
+		gatt.close();
 		Log.i("H7ConnectThread", "Closing HRsensor");
 	}
 
@@ -55,12 +56,15 @@ public class H7ConnectThread  extends Thread{
 			Log.v("H7ConnectThread", "Data received from HRM: "+ bmp);
 	    }
 	 
-		//called on the successful connection
+		//called on a state change. continue discovery / throw error + always wipe list data
 	    @Override
-	    public void onConnectionStateChange(final BluetoothGatt gatt, final int status, final int newState) { 
+	    public void onConnectionStateChange(final BluetoothGatt gatt, final int status, final int newState) {
+			DataHandler.getInstance().clearRRIValuesList();
+			DataHandler.getInstance().clearTotalValuesReceived();
 	    	if (newState ==  BluetoothGatt.STATE_DISCONNECTED)
 	    	{
 				Log.e("H7ConnectThread", "device disconnected");
+
 				ac.connectionError();
 	    	}
 	    	else{

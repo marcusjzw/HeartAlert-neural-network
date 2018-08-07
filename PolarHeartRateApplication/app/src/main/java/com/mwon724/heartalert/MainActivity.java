@@ -28,6 +28,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -46,6 +47,7 @@ public class MainActivity extends Activity implements OnItemSelectedListener, Ob
     private Spinner deviceDropdown;
     TextView totalValuesReceived;
     TextView rriHistory;
+    Button analyseButton;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -195,6 +197,8 @@ public class MainActivity extends Activity implements OnItemSelectedListener, Ob
         if (id == R.id.action_settings) { //close connection
             menuBool = false;
             Log.d("Main Activity", "disable pressed");
+            rriHistory.setText(""); // reset ScrollView
+            totalValuesReceived.setText("Total Values: ");
             if (deviceDropdown != null) {
                 deviceDropdown.setSelection(0);
             }
@@ -271,7 +275,7 @@ public class MainActivity extends Activity implements OnItemSelectedListener, Ob
     public void connectionError() {
 
         Log.w("Main Activity", "Connection error occured");
-        if (menuBool) {//did not manually tried to disconnect
+        if (menuBool) {//did not manually try to disconnect
             Log.d("Main Activity", "in the app");
             menuBool = false;
             final MainActivity ac = this;
@@ -321,6 +325,15 @@ public class MainActivity extends Activity implements OnItemSelectedListener, Ob
                 rriHistory = (TextView) findViewById(R.id.textViewRRI);
                 rriHistory.append("\n" + String.valueOf(DataHandler.getInstance().getRRIValuesList()));
 
+                analyseButton = (Button) findViewById(R.id.analyseButton);
+                if (DataHandler.getInstance().getTotalValuesReceived() < 60) { // restrict analysis if readings < 1 min
+                    analyseButton.setAlpha(.5f);
+                    analyseButton.setClickable(false);
+                }
+                else {
+                    analyseButton.setAlpha(1);
+                    analyseButton.setClickable(true);
+                }
 
             }
         });
