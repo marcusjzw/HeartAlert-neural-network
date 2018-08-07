@@ -1,6 +1,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:ads="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
@@ -9,7 +9,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:ignore="MergeRootFrame" >
+    tools:ignore="MergeRootFrame">
 
     <TextView
         android:id="@+id/textView1"
@@ -24,19 +24,22 @@
 
     <TextView
         android:id="@+id/rpm"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="139dp"
+        android:layout_height="44dp"
         android:layout_gravity="center_horizontal"
-        android:paddingTop="20dp"
+        android:fontFamily="sans-serif"
+        android:paddingTop="5dp"
         android:text="@string/rpm"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="@color/bpmColor"
-        android:textSize="60sp" />
+        android:textAlignment="center"
+        android:textColor="@android:color/holo_red_light"
+        android:textSize="36sp"
+        android:textStyle="bold"
+        android:typeface="sans" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center" >
+        android:layout_gravity="center">
 
         <TextView
             android:id="@+id/min"
@@ -62,14 +65,31 @@
             android:gravity="center"
             android:text="@string/max" />
     </LinearLayout>
-
     <com.androidplot.xy.XYPlot
         android:id="@+id/dynamicPlot"
+        title="Heart Rate"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        title="Heart Rate" >
-     </com.androidplot.xy.XYPlot>
+        android:layout_height="285dp"
+        android:layout_marginTop="10dp">
+    </com.androidplot.xy.XYPlot>
+
+    <ScrollView
+        android:id="@+id/rriScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/textViewRRI"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Historical RRI Values..." />
+        </LinearLayout>
+    </ScrollView>
 
 
 </LinearLayout>

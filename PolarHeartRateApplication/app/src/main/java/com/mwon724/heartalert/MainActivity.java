@@ -27,6 +27,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
+import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,11 +38,14 @@ public class MainActivity extends Activity implements OnItemSelectedListener, Ob
     boolean searchBt = true;
     BluetoothAdapter mBluetoothAdapter;
     List<BluetoothDevice> pairedDevices = new ArrayList<>();
-    boolean menuBool = false; //display or not the disconnect option
+    boolean menuBool = false; // should "Disconnect" display? false = don't display cos not connected
     private XYPlot plot;
     boolean h7 = false; //Was the BTLE tested
     boolean normal = false; //Was the BT tested
     private Spinner deviceDropdown;
+    private ScrollView scrollView;
+    List<Integer> rriList = new ArrayList<>();
+    TextView textViewRRI;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +64,7 @@ public class MainActivity extends Activity implements OnItemSelectedListener, Ob
         //verify if bluetooth device are enabled
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         if (DataHandler.getInstance().newValue) {
-            //Verify if bluetooth if activated, if not activate it
+            // Verify if BLE active, if not activate it. code courtesy of Android Developer API
             mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
             if(mBluetoothAdapter != null){
                 if (!mBluetoothAdapter.isEnabled()) {
@@ -95,18 +99,18 @@ public class MainActivity extends Activity implements OnItemSelectedListener, Ob
             plot = (XYPlot) findViewById(R.id.dynamicPlot);
             if (plot.getSeriesSet().size() == 0) {
                 Number[] series1Numbers = {};
-                DataHandler.getInstance().setSeries1(new SimpleXYSeries(Arrays.asList(series1Numbers), SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "Heart Rate"));
+                DataHandler.getInstance().setSeries1(new SimpleXYSeries(Arrays.asList(series1Numbers), SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "RRI / IBI"));
             }
+
             DataHandler.getInstance().setNewValue(false);
 
         } else {
             listBT();
             plot = (XYPlot) findViewById(R.id.dynamicPlot);
-
         }
         //LOAD Graph
-        LineAndPointFormatter series1Format = new LineAndPointFormatter(Color.rgb(0, 0, 255), Color.rgb(200, 200, 200), null, null);
-        series1Format.setPointLabelFormatter(new PointLabelFormatter());
+                LineAndPointFormatter series1Format = new LineAndPointFormatter(Color.rgb(1, 50, 67), Color.rgb(103, 65, 114), null, null);
+        // series1Format.setPointLabelFormatter(new PointLabelFormatter());
         plot.addSeries(DataHandler.getInstance().getSeries1(), series1Format);
         plot.setTicksPerRangeLabel(3);
         plot.getGraphWidget().setDomainLabelOrientation(-45);
@@ -275,7 +279,6 @@ public class MainActivity extends Activity implements OnItemSelectedListener, Ob
                 public void run() {
                     Toast.makeText(getBaseContext(), getString(R.string.couldnotconnect), Toast.LENGTH_SHORT).show();
                     //TextView rpm = (TextView) findViewById(R.id.rpm);
-                    //rpm.setText("0 BMP");
                     Spinner deviceDropdown = (Spinner) findViewById(R.id.deviceDropdown);
                     if (DataHandler.getInstance().getID() < deviceDropdown.getCount())
                         deviceDropdown.setSelection(DataHandler.getInstance().getID());
@@ -320,6 +323,11 @@ public class MainActivity extends Activity implements OnItemSelectedListener, Ob
 
                 TextView max = (TextView) findViewById(R.id.max);
                 max.setText(DataHandler.getInstance().getMax());
+
+                textViewRRI = (TextView) findViewById(R.id.textViewRRI);
+                textViewRRI.append("\n" + String.valueOf(DataHandler.getInstance().getLastIntValue()));
+
+
             }
         });
         receiveData();

@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">HeartAlert</string>
+    <string name="app_name">HeartAlert: Emergency Callouts</string>
     <string name="selectDevice">Select BLE Device (Polar H7 or NRF52 Kit)</string>
     <string name="action_settings">Disconnect BLE Device</string>
     <string name="couldnotconnect">Sorry, an error occurred while connecting to the device</string>
-    <string name="bluetooth">Bluetooth</string>
+    <string name="bluetooth">Bluetooth LE</string>
     <string name="bluetoothOff">BluetoothAdapter is off, would you like to turn it on?</string>
-    <string name="rpm">RRI</string>
+    <string name="rpm">RRI </string>
     <string name="min">Min</string>
     <string name="max">Max</string>
     <string name="avg">Avg</string>
     <string name="about">About</string>
     <string name="title_activity_about">About</string>
-    <string name="banner_ad_unit_id">ca-app-pub-7344227317954564/2556270733</string>
     <string name="aboutText">
         This app is made for Project 97 of the 2018 Electrical and Computer Engineering Part IV Projects
         at the University of Auckland. The app\'s focus is to provide automated emergency callouts when
