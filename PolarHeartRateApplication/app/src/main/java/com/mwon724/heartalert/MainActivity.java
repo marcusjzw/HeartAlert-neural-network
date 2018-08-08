@@ -34,6 +34,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import static android.content.ContentValues.TAG;
+
 public class MainActivity extends Activity implements OnItemSelectedListener, Observer {
 
     private int MAX_SIZE = 120; //graph max size
@@ -55,7 +57,17 @@ public class MainActivity extends Activity implements OnItemSelectedListener, Ob
         setContentView(R.layout.activity_main);
         Log.i("Main Activity", "Starting Polar HR monitor main activity");
         DataHandler.getInstance().addObserver(this);
+        analyseButton = (Button) findViewById(R.id.analyseButton);
+        analyseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d(TAG, "onClick: Clicked Analyse Button");
 
+                Intent intent = new Intent(MainActivity.this, NeuralNetActivity.class);
+                intent.putStringArrayListExtra("RRI_VALUES", DataHandler.getInstance().getRRIValuesList());
+                startActivity(intent);
+            }
+        });
         //Verify if device is to old for BTLE
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR2) {
 
@@ -325,7 +337,6 @@ public class MainActivity extends Activity implements OnItemSelectedListener, Ob
                 rriHistory = (TextView) findViewById(R.id.textViewRRI);
                 rriHistory.append("\n" + String.valueOf(DataHandler.getInstance().getRRIValuesList()));
 
-                analyseButton = (Button) findViewById(R.id.analyseButton);
                 if (DataHandler.getInstance().getTotalValuesReceived() < 60) { // restrict analysis if readings < 1 min
                     analyseButton.setAlpha(.5f);
                     analyseButton.setClickable(false);

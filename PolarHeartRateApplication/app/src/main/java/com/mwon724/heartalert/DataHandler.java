@@ -27,9 +27,14 @@ import com.androidplot.xy.SimpleXYSeries;
  *
  */
 public class DataHandler extends Observable{
-	private static DataHandler dd = new DataHandler();
+	private static DataHandler dd = new DataHandler(); // singleton pattern to force one data handler
+    private DataHandler(){ }
 
-	boolean newValue = true;
+    public static DataHandler getInstance(){
+        return dd;
+    }
+
+    boolean newValue = true;
 	SimpleXYSeries series1;
 	ConnectThread reader;
 	H7ConnectThread H7;
@@ -40,21 +45,13 @@ public class DataHandler extends Observable{
 	int max = 0;
 	int totalValuesReceived = 0; // counts how many values have been sent by belt
 
-    List rriValuesList = new ArrayList<>();
+    ArrayList rriValuesList = new ArrayList<>();
 	
 	//for averaging
 	int data = 0;
 	int total = 0;
 
 	int id;
-	
-	private DataHandler(){
-		
-	}
-	
-	public static DataHandler getInstance(){
-		return dd;
-	}
 
 	public void acqui(int i){
 		if (i == 2000){
@@ -123,7 +120,7 @@ public class DataHandler extends Observable{
 
 	// RRI Value List + Occurrence Tracking Getters/Setters
     public int getTotalValuesReceived() { return totalValuesReceived;}
-    public List getRRIValuesList() { return rriValuesList;}
+    public ArrayList getRRIValuesList() { return rriValuesList;}
     public void clearTotalValuesReceived() {totalValuesReceived = 0;}
     public void clearRRIValuesList() {rriValuesList.clear();}
 	

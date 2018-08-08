@@ -39,6 +39,11 @@
             </intent-filter>
         </activity>
         <activity
+            android:name="com.mwon724.heartalert.NeuralNetActivity"
+            android:label="Neural Network Results Screen"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
             android:name="com.mwon724.heartalert.AboutActivity"
             android:label="@string/title_activity_about"
             android:screenOrientation="portrait">
