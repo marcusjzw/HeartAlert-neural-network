@@ -24,7 +24,7 @@ model = Sequential() # defining layers left to right (input, hidden, output)
 model.add(Dense(12, input_dim=4, activation='relu')) # 4 input dimensions
 model.add(Dense(9, activation='relu'))
 # relu = squishing weights in between the 0 to 1 domain and passing to next layer. other methods: sigmoid, tanh
-model.add(Dense(1, activation='sigmoid')) # output layer, sigmoid for optimal shape to get 'definite' answer
+model.add(Dense(2, activation='sigmoid')) # output layer, sigmoid for optimal shape to get 'definite' answer
 
 # each 'forward and bakcward pass' is known as an epoch
 # forward pass = run through the layers, come up with prediction
@@ -36,7 +36,7 @@ model.compile(loss = "binary_crossentropy", optimizer="adam", metrics=['accuracy
 # adam = method for gradient descent, adam is an effective approximation
 
 # call function to fit to the data (Training the network)
-model.fit(inputs, outputs, epochs = 10000, batch_size=5)
+model.fit(inputs, outputs, epochs = 100, batch_size=5)
 # evaluation of model
 scores = model.evaluate(inputs, outputs)
 print("\n %s: %.2f%%" % (model.metrics_names[1], scores[1]*100))

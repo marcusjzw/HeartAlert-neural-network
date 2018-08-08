@@ -3,8 +3,37 @@ from keras.models import load_model
 from keras.models import model_from_json
 from keras.optimizers import SGD
 from keras.layers import Dense
+from keras import backend as K
 import numpy
 import json
+import tensorflow as tf
+from tensorflow.python.tools import freeze_graph, optimize_for_inference_lib
+
+# this method converts Keras model => Tensorflow .pb via freeze_graph
+def export_model(saver, input_node_names, output_node_name):
+    tf.train.write_graph(K.get_session().graph_def, 'out', \
+    'vt_classification_tf' + '_graph.pbtxt')
+
+    saver.save(K.get_session(), 'out/' + 'vt_classification_tf' + '.chkp')
+
+    freeze_graph.freeze_graph('out/' + 'vt_classification_tf' + '_graph.pbtxt', None, \
+                            False, 'out/' + 'vt_classification_tf' + '.chkp', output_node_name, \
+                            "save/restore_all", "save/Const:0", \
+                            'out/frozen_' + 'vt_classification_tf' + '.pb', True, "")
+
+    input_graph_def = tf.GraphDef()
+    with tf.gfile.Open('out/frozen_' + 'vt_classification_tf' + '.pb', "rb") as f:
+        input_graph_def.ParseFromString(f.read())
+    
+    output_graph_def = optimize_for_inference_lib.optimize_for_inference(
+        input_graph_def, input_node_names, [output_node_name],
+        tf.float32.as_datatype_enum)
+    
+    with tf.gfile.FastGFile('out/opt_' + 'vt_classification_tf' + '.pb', "wb") as f:
+        f.write(output_graph_def.SerializeToString())
+    
+    print("Graph .pb saved!")
+    return
 
 numpy.random.seed(7)
 
@@ -36,7 +65,9 @@ model.fit(inputs, outputs, epochs = 1000, batch_size=5)
 # evaluation of model
 scores = model.evaluate(inputs, outputs)
 print("\n %s: %.2f%%" % (model.metrics_names[1], scores[1]*100))
-
+print("NODE NAMES::::::::::::::::::::::::::::::::::::::::::::::")
+for n in tf.get_default_graph().as_graph_def().node:
+    print(n.name) 
 # save model (complete)
 model.save('vt_classification_model_complete75PERCENT.h5')
 # save model architecture only
@@ -53,4 +84,4 @@ predictions = model.predict(inputs)
 rounded_predictions = [round(inputs[0]) for inputs in predictions]
 print(rounded_predictions)
 
-
+export_model(tf.train.Saver(), ["dense_1_input", "dense_2/Relu"], "dense_3/Sigmoid")
