@@ -32,6 +32,7 @@ dependencies {
     implementation files('libs/androidplot-core-0.6.0.jar')
     implementation 'com.google.gms:google-services:3.2.0'
     implementation 'org.tensorflow:tensorflow-android:+'
+    implementation 'com.google.guava:guava:14.0.1' // guava 14.0.1
 }
 
 apply plugin: 'com.google.gms.google-services'

@@ -9,9 +9,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import org.tensorflow.contrib.android.TensorFlowInferenceInterface;
+import com.google.common.primitives.Ints;
 
-import java.lang.reflect.Array;
-import android.content.res.AssetManager;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +18,7 @@ public class NeuralNetActivity extends Activity{
     private static final String TAG = "NeuralNetActivity";
     List rriValuesList = new ArrayList<>();
     TextView rriValuesReceived;
+    // TensorFlowInferenceInterface tensorflow = new TensorFlowInferenceInterface(getAssets(), "file:///android_asset/opt_vt_classification_tf.pb");
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,11 +38,18 @@ public class NeuralNetActivity extends Activity{
         rriValuesReceived = (TextView) findViewById(R.id.receivedRRIText);
         rriValuesReceived.append("\n" + rriValuesList);
         rriValuesReceived.append("\n Sending for prediction into neural network...");
+        // 1. convert to LF, HF, LF/HF....
         // fetch prediction from .pb
-
+        // convert ArrayList to int array, so it can be loaded onto a tensor
+        int[] rriArray = Ints.toArray(rriValuesList);
+        Log.d(TAG, "ARRAY CONVERSION: " + rriArray.toString());
+        // load input? Node names: dense_1_input, dense_2/Relu, dense_3/Sigmoid
+        // tensorflow.feed();
+        // display result
     }
 
     protected int predictHeartState(ArrayList list) {
         return 0;
     }
+
 }
