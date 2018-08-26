@@ -41,8 +41,6 @@ public class DataHandler extends Observable{
 	
 	int pos = 0;
 	int rriVal = 0; //incoming HRM value
-	int min = 0;
-	int max = 0;
 	int totalValuesReceived = 0; // counts how many values have been sent by belt
 
     ArrayList rriValuesList = new ArrayList<>();
@@ -68,14 +66,6 @@ public class DataHandler extends Observable{
 		totalValuesReceived++;
 		rriValuesList.add(rriVal);
         Log.i("DataHandler", "bpmVal converted  to RRI: " + rriVal);
-		if(rriVal != 0){
-			data += rriVal;
-			total++;
-		}
-		if(rriVal < min || min == 0)
-			min = rriVal;
-		else if(rriVal > max)
-			max = rriVal;
 
 
 		setChanged(); // must call this before notifying observers, marks hasChanged() to true
@@ -84,14 +74,6 @@ public class DataHandler extends Observable{
 
     public String getLastValue() { return rriVal + " ms";}
     public int getLastIntValue() { return rriVal;}
-	public String getMin() { return "Min " + min + " ms";}
-	public String getMax(){ return "Max " + max + " ms";}
-	
-	public String getAvg(){
-		if(total==0)
-            return "Avg " + 0 + " ms";
-		return "Avg " + data/total + " ms";
-	}
     public void setNewValue(boolean newValue) {this.newValue = newValue; }
 	public SimpleXYSeries getSeries1() {
 		return series1;

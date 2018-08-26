@@ -63,9 +63,18 @@ public class MainActivity extends Activity implements OnItemSelectedListener, Ob
             public void onClick(View view) {
                 Log.d(TAG, "onClick: Clicked Analyse Button");
 
-                Intent intent = new Intent(MainActivity.this, NeuralNetActivity.class);
-                intent.putStringArrayListExtra("RRI_VALUES", DataHandler.getInstance().getRRIValuesList());
-                startActivity(intent);
+                try {
+                    Intent intent = new Intent(MainActivity.this, NeuralNetActivity.class);
+                    intent.putStringArrayListExtra("RRI_VALUES", DataHandler.getInstance().getRRIValuesList());
+                    startActivity(intent);
+                }
+                catch (Exception e) {
+                    Log.d(TAG, "onClick: Something went wrong in trying to analyse");
+                    Toast toast = Toast.makeText(getApplicationContext(),
+                            "Something went wrong, try again!",Toast.LENGTH_LONG);
+                    toast.setMargin(50,50);
+                    toast.show();
+                }
             }
         });
         //Verify if device is to old for BTLE
