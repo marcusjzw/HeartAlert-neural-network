@@ -2,6 +2,7 @@ package com.mwon724.heartalert;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.logging.Logger;
 
 import android.annotation.SuppressLint;
 import android.bluetooth.BluetoothDevice;
@@ -12,6 +13,8 @@ import android.bluetooth.BluetoothGattDescriptor;
 import android.bluetooth.BluetoothGattService;
 import android.provider.ContactsContract;
 import android.util.Log;
+
+import static android.content.ContentValues.TAG;
 
 /**
  * This thread to the connection with the bluetooth device
@@ -48,12 +51,14 @@ public class H7ConnectThread  extends Thread{
 	private final BluetoothGattCallback btleGattCallback = new BluetoothGattCallback() {
 		 
 		//Called everytime sensor send data
+
 		@Override
 	    public void onCharacteristicChanged(BluetoothGatt gatt, final BluetoothGattCharacteristic characteristic) {
-	    	byte[] data = characteristic.getValue();
-	    	int bmp = data[1] & 0xFF; // To unsign the value
-	    	DataHandler.getInstance().cleanInput(bmp);
-			Log.v("H7ConnectThread", "Data received from HRM: "+ bmp);
+			Integer[] intervals = extractRRInterval(characteristic);
+			for (int i = 0; i < intervals.length; i++) {
+				DataHandler.getInstance().cleanInput(intervals[i]);
+				Log.d("H7ConnectThread", "onCharacteristicChanged, Received RR:" +  intervals[i]);
+			}
 	    }
 	 
 		//called on a state change. continue discovery / throw error + always wipe list data
@@ -97,4 +102,50 @@ public class H7ConnectThread  extends Thread{
 				}
 	    }
 	};
+
+	private static Integer[] extractRRInterval(
+			BluetoothGattCharacteristic characteristic) {
+		// defined here: https://www.bluetooth.com/specifications/gatt/viewer?attributeXmlFile=org.bluetooth.characteristic.heart_rate_measurement.xml
+		int flag = characteristic.getIntValue(BluetoothGattCharacteristic.FORMAT_UINT8, 0);
+		int format = -1;
+		int energy = -1;
+		int offset = 1; // This depends on hear rate value format and if there is energy data
+		int rr_count = 0;
+
+		if ((flag & 0x01) != 0) {
+			format = BluetoothGattCharacteristic.FORMAT_UINT16;
+			Log.d(TAG, "Heart rate format UINT16.");
+			offset = 3;
+		} else {
+			format = BluetoothGattCharacteristic.FORMAT_UINT8;
+			Log.d(TAG, "Heart rate format UINT8.");
+			offset = 2;
+		}
+		if ((flag & 0x08) != 0) {
+			// calories present
+			energy = characteristic.getIntValue(BluetoothGattCharacteristic.FORMAT_UINT16, offset);
+			offset += 2;
+			Log.d(TAG, "Received energy: {}"+ energy);
+		}
+		if ((flag & 0x16) != 0){
+			// RR stuff.
+			Log.d(TAG, "RR stuff found at offset: "+ offset);
+			Log.d(TAG, "RR length: "+ (characteristic.getValue()).length);
+			rr_count = ((characteristic.getValue()).length - offset) / 2;
+			Log.d(TAG, "RR length: "+ (characteristic.getValue()).length);
+			Log.d(TAG, "rr_count: "+ rr_count);
+			if (rr_count > 0) {
+				Integer[] mRr_values = new Integer[rr_count];
+				for (int i = 0; i < rr_count; i++) {
+					mRr_values[i] = characteristic.getIntValue(
+							BluetoothGattCharacteristic.FORMAT_UINT16, offset);
+					offset += 2;
+					Log.d(TAG, "Received RR: " + mRr_values[i]);
+				}
+				return mRr_values;
+			}
+		}
+		Log.d(TAG, "No RR data on this update: ");
+		return null;
+	}
 }

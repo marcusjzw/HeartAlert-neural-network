@@ -9,11 +9,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import org.tensorflow.contrib.android.TensorFlowInferenceInterface;
-
-import com.google.common.primitives.Doubles;
 import com.google.common.primitives.Ints;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
@@ -26,6 +23,13 @@ import units.TimeUnit;
 
 public class NeuralNetActivity extends Activity{
     private static final String TAG = "NeuralNetActivity";
+    private static final String MODEL_FILE = "file:///android_asset/opt_vt_classification_tf.pb";
+    private static final String INPUT_NODE = "dense_1_input";
+    private static final String[] OUTPUT_NODES = {"dense_3/Sigmoid"};
+    private static final String OUTPUT_NODE = "dense_3/Sigmoid";
+    private TensorFlowInferenceInterface inferenceInterface;
+
+    private static final long[] INPUT_SIZE = {1,70};
     List rriValuesList = new ArrayList<>();
     TextView rriValuesReceived;
     // TensorFlowInferenceInterface tensorflow = new TensorFlowInferenceInterface(getAssets(), "file:///android_asset/opt_vt_classification_tf.pb");
@@ -34,6 +38,7 @@ public class NeuralNetActivity extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_neural);
         Log.d(TAG, "onCreate: Neural Screen Entered");
+        inferenceInterface = new TensorFlowInferenceInterface(getAssets(), MODEL_FILE);
 
         Button btnToMain = (Button) findViewById(R.id.btnGoToMain);
         btnToMain.setOnClickListener(new View.OnClickListener() {
@@ -45,30 +50,37 @@ public class NeuralNetActivity extends Activity{
             }
         });
         rriValuesList = getIntent().getStringArrayListExtra("RRI_VALUES");
+        int[] rriIntArray = Ints.toArray(rriValuesList); // convert Integer list to primitive array
         rriValuesReceived = (TextView) findViewById(R.id.receivedRRIText);
         rriValuesReceived.append("\n" + rriValuesList);
         rriValuesReceived.append("\n\n\nSending for prediction into neural network...");
-        // 1. convert to LF, HF, LF/HF....
-        List<HRVParameter> hrvParameterList = freqParamCalculation(rriValuesList);
+
+        // 1. convert to VLF, LF, HF, LF/HF....
+        List<HRVParameter> hrvParameterList = freqParamCalculation(rriIntArray);
         for (int i = 0; i < 4; i++) {
             rriValuesReceived.append("\n"+hrvParameterList.get(i).getName()+": " +
-                    hrvParameterList.get(i).getValue()); // may need /100 on HF and LF 
+                    hrvParameterList.get(i).getValue()); // may need /100 on HF and LF
         }
 
         // fetch prediction from .pb
+        float[] result = new float[1];
+        // inferenceInterface.feed(INPUT_NODE, rriIntArray, INPUT_SIZE);
+        // inferenceInterface.run(OUTPUT_NODES);
+        // inferenceInterface.fetch(OUTPUT_NODE, result);
+        rriValuesReceived.append("\n\n\n\nRESULT: " + result[0]);
+
+
         // convert ArrayList to int array, so it can be loaded onto a tensor
-        int[] rriArray = Ints.toArray(rriValuesList);
-        Log.d(TAG, "ARRAY CONVERSION: " + rriArray.toString());
+        Log.d(TAG, "ARRAY CONVERSION: " + rriIntArray.toString());
         // load input? Node names: dense_1_input, dense_2/Relu, dense_3/Sigmoid
         // tensorflow.feed();
         // display result
     }
 
-    protected List<HRVParameter> freqParamCalculation(List rriValues) {
-        int[] rriIntArray = Ints.toArray(rriValues); // convert Integer list to primitive array
-        double[] rriDoubleArray = new double[rriIntArray.length];
-        for(int i = 0; i < rriIntArray.length; i++) {
-            rriDoubleArray[i] = rriIntArray[i]; // convert int array to double array
+    protected List<HRVParameter> freqParamCalculation(int[] rriValues) {
+        double[] rriDoubleArray = new double[rriValues.length];
+        for(int i = 0; i < rriValues.length; i++) {
+            rriDoubleArray[i] = rriValues[i]; // convert int array to double array
         }
         // pass in double array
         RRData data = RRData.createFromRRInterval(rriDoubleArray, TimeUnit.MILLISECOND);
@@ -78,10 +90,6 @@ public class NeuralNetActivity extends Activity{
                 HRVParameterEnum.VLF, HRVParameterEnum.LFHF));
 
         return facade.calculateParameters();
-    }
-
-    protected int predictHeartState(ArrayList list) {
-        return 0;
     }
 
 }

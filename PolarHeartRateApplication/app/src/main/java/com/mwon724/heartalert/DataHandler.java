@@ -60,14 +60,12 @@ public class DataHandler extends Observable{
 		}
 		pos++;
 	}
-	// assigns incoming HRM value if not garbage + converts to RRI
-	public void cleanInput(int bpmVal){
-		rriVal = 60*1000/bpmVal;
+
+	public void cleanInput(int val){
+		rriVal = val;
 		totalValuesReceived++;
-		rriValuesList.add(rriVal);
-        Log.i("DataHandler", "bpmVal converted  to RRI: " + rriVal);
-
-
+		rriValuesList.add(val);
+        Log.i("DataHandler", "RRI Value detected: " + String.valueOf(rriVal));
 		setChanged(); // must call this before notifying observers, marks hasChanged() to true
 		notifyObservers(); // notify all observers, causing them to be notified by calling their update()
 	}
