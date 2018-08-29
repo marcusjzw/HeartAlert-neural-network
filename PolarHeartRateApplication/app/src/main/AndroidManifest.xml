@@ -3,12 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.mwon724.heartalert">
 
-    <!-- Include required permissions for Google Mobile Ads to run. -->
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="com.android.vending.BILLING" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> <!-- for Binder call-->
 
     <!--@
     TODO take care og the backup thing More info: https://developer.android.com/preview/backup/index.html (at line 12)
@@ -47,7 +46,7 @@
             android:name="com.mwon724.heartalert.AboutActivity"
             android:label="@string/title_activity_about"
             android:screenOrientation="portrait">
-        </activity><!-- Include the AdActivity configChanges and theme. -->
+        </activity>
     </application>
 
 </manifest>
