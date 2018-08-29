@@ -1,0 +1,2 @@
+input node name: "dense_1_input"
+output node name: "output_node0"

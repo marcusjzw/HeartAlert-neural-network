@@ -1,2 +1,0 @@
-model_checkpoint_path: "vt_classification_tf.chkp"
-all_model_checkpoint_paths: "vt_classification_tf.chkp"

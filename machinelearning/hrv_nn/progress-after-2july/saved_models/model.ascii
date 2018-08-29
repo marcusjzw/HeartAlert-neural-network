@@ -112,7 +112,7 @@ node {
   attr {
     key: "seed2"
     value {
-      i: 8974511
+      i: 6283267
     }
   }
 }
@@ -489,7 +489,7 @@ node {
   attr {
     key: "seed2"
     value {
-      i: 3335364
+      i: 1103922
     }
   }
 }
@@ -866,7 +866,7 @@ node {
   attr {
     key: "seed2"
     value {
-      i: 3905091
+      i: 1766139
     }
   }
 }
@@ -1151,6 +1151,451 @@ node {
       type: DT_FLOAT
     }
   }
+}
+node {
+  name: "Placeholder"
+  op: "Placeholder"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "shape"
+    value {
+      shape {
+        dim {
+          size: 4
+        }
+        dim {
+          size: 12
+        }
+      }
+    }
+  }
+}
+node {
+  name: "Assign"
+  op: "Assign"
+  input: "dense_1/kernel"
+  input: "Placeholder"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@dense_1/kernel"
+      }
+    }
+  }
+  attr {
+    key: "use_locking"
+    value {
+      b: false
+    }
+  }
+  attr {
+    key: "validate_shape"
+    value {
+      b: true
+    }
+  }
+}
+node {
+  name: "Placeholder_1"
+  op: "Placeholder"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "shape"
+    value {
+      shape {
+        dim {
+          size: 12
+        }
+      }
+    }
+  }
+}
+node {
+  name: "Assign_1"
+  op: "Assign"
+  input: "dense_1/bias"
+  input: "Placeholder_1"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@dense_1/bias"
+      }
+    }
+  }
+  attr {
+    key: "use_locking"
+    value {
+      b: false
+    }
+  }
+  attr {
+    key: "validate_shape"
+    value {
+      b: true
+    }
+  }
+}
+node {
+  name: "Placeholder_2"
+  op: "Placeholder"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "shape"
+    value {
+      shape {
+        dim {
+          size: 12
+        }
+        dim {
+          size: 9
+        }
+      }
+    }
+  }
+}
+node {
+  name: "Assign_2"
+  op: "Assign"
+  input: "dense_2/kernel"
+  input: "Placeholder_2"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@dense_2/kernel"
+      }
+    }
+  }
+  attr {
+    key: "use_locking"
+    value {
+      b: false
+    }
+  }
+  attr {
+    key: "validate_shape"
+    value {
+      b: true
+    }
+  }
+}
+node {
+  name: "Placeholder_3"
+  op: "Placeholder"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "shape"
+    value {
+      shape {
+        dim {
+          size: 9
+        }
+      }
+    }
+  }
+}
+node {
+  name: "Assign_3"
+  op: "Assign"
+  input: "dense_2/bias"
+  input: "Placeholder_3"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@dense_2/bias"
+      }
+    }
+  }
+  attr {
+    key: "use_locking"
+    value {
+      b: false
+    }
+  }
+  attr {
+    key: "validate_shape"
+    value {
+      b: true
+    }
+  }
+}
+node {
+  name: "Placeholder_4"
+  op: "Placeholder"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "shape"
+    value {
+      shape {
+        dim {
+          size: 9
+        }
+        dim {
+          size: 1
+        }
+      }
+    }
+  }
+}
+node {
+  name: "Assign_4"
+  op: "Assign"
+  input: "dense_3/kernel"
+  input: "Placeholder_4"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@dense_3/kernel"
+      }
+    }
+  }
+  attr {
+    key: "use_locking"
+    value {
+      b: false
+    }
+  }
+  attr {
+    key: "validate_shape"
+    value {
+      b: true
+    }
+  }
+}
+node {
+  name: "Placeholder_5"
+  op: "Placeholder"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "shape"
+    value {
+      shape {
+        dim {
+          size: 1
+        }
+      }
+    }
+  }
+}
+node {
+  name: "Assign_5"
+  op: "Assign"
+  input: "dense_3/bias"
+  input: "Placeholder_5"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@dense_3/bias"
+      }
+    }
+  }
+  attr {
+    key: "use_locking"
+    value {
+      b: false
+    }
+  }
+  attr {
+    key: "validate_shape"
+    value {
+      b: true
+    }
+  }
+}
+node {
+  name: "IsVariableInitialized"
+  op: "IsVariableInitialized"
+  input: "dense_1/kernel"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@dense_1/kernel"
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "IsVariableInitialized_1"
+  op: "IsVariableInitialized"
+  input: "dense_1/bias"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@dense_1/bias"
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "IsVariableInitialized_2"
+  op: "IsVariableInitialized"
+  input: "dense_2/kernel"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@dense_2/kernel"
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "IsVariableInitialized_3"
+  op: "IsVariableInitialized"
+  input: "dense_2/bias"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@dense_2/bias"
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "IsVariableInitialized_4"
+  op: "IsVariableInitialized"
+  input: "dense_3/kernel"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@dense_3/kernel"
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "IsVariableInitialized_5"
+  op: "IsVariableInitialized"
+  input: "dense_3/bias"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@dense_3/bias"
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "init"
+  op: "NoOp"
+  input: "^dense_1/bias/Assign"
+  input: "^dense_1/kernel/Assign"
+  input: "^dense_2/bias/Assign"
+  input: "^dense_2/kernel/Assign"
+  input: "^dense_3/bias/Assign"
+  input: "^dense_3/kernel/Assign"
 }
 node {
   name: "Adam/iterations/initial_value"
@@ -12131,120 +12576,6 @@ node {
   input: "^training/Adam/Assign_9"
 }
 node {
-  name: "IsVariableInitialized"
-  op: "IsVariableInitialized"
-  input: "dense_1/kernel"
-  attr {
-    key: "_class"
-    value {
-      list {
-        s: "loc:@dense_1/kernel"
-      }
-    }
-  }
-  attr {
-    key: "dtype"
-    value {
-      type: DT_FLOAT
-    }
-  }
-}
-node {
-  name: "IsVariableInitialized_1"
-  op: "IsVariableInitialized"
-  input: "dense_1/bias"
-  attr {
-    key: "_class"
-    value {
-      list {
-        s: "loc:@dense_1/bias"
-      }
-    }
-  }
-  attr {
-    key: "dtype"
-    value {
-      type: DT_FLOAT
-    }
-  }
-}
-node {
-  name: "IsVariableInitialized_2"
-  op: "IsVariableInitialized"
-  input: "dense_2/kernel"
-  attr {
-    key: "_class"
-    value {
-      list {
-        s: "loc:@dense_2/kernel"
-      }
-    }
-  }
-  attr {
-    key: "dtype"
-    value {
-      type: DT_FLOAT
-    }
-  }
-}
-node {
-  name: "IsVariableInitialized_3"
-  op: "IsVariableInitialized"
-  input: "dense_2/bias"
-  attr {
-    key: "_class"
-    value {
-      list {
-        s: "loc:@dense_2/bias"
-      }
-    }
-  }
-  attr {
-    key: "dtype"
-    value {
-      type: DT_FLOAT
-    }
-  }
-}
-node {
-  name: "IsVariableInitialized_4"
-  op: "IsVariableInitialized"
-  input: "dense_3/kernel"
-  attr {
-    key: "_class"
-    value {
-      list {
-        s: "loc:@dense_3/kernel"
-      }
-    }
-  }
-  attr {
-    key: "dtype"
-    value {
-      type: DT_FLOAT
-    }
-  }
-}
-node {
-  name: "IsVariableInitialized_5"
-  op: "IsVariableInitialized"
-  input: "dense_3/bias"
-  attr {
-    key: "_class"
-    value {
-      list {
-        s: "loc:@dense_3/bias"
-      }
-    }
-  }
-  attr {
-    key: "dtype"
-    value {
-      type: DT_FLOAT
-    }
-  }
-}
-node {
   name: "IsVariableInitialized_6"
   op: "IsVariableInitialized"
   input: "Adam/iterations"
@@ -12682,19 +13013,13 @@ node {
   }
 }
 node {
-  name: "init"
+  name: "init_1"
   op: "NoOp"
   input: "^Adam/beta_1/Assign"
   input: "^Adam/beta_2/Assign"
   input: "^Adam/decay/Assign"
   input: "^Adam/iterations/Assign"
   input: "^Adam/lr/Assign"
-  input: "^dense_1/bias/Assign"
-  input: "^dense_1/kernel/Assign"
-  input: "^dense_2/bias/Assign"
-  input: "^dense_2/kernel/Assign"
-  input: "^dense_3/bias/Assign"
-  input: "^dense_3/kernel/Assign"
   input: "^training/Adam/Variable/Assign"
   input: "^training/Adam/Variable_1/Assign"
   input: "^training/Adam/Variable_10/Assign"
@@ -12715,484 +13040,27 @@ node {
   input: "^training/Adam/Variable_9/Assign"
 }
 node {
-  name: "group_deps"
-  op: "NoOp"
-  input: "^loss/mul"
-  input: "^metrics/acc/Mean_1"
-}
-node {
-  name: "group_deps_1"
-  op: "NoOp"
-  input: "^dense_3/Sigmoid"
-}
-node {
-  name: "save/Const"
-  op: "Const"
+  name: "Placeholder_6"
+  op: "Placeholder"
   attr {
     key: "dtype"
     value {
-      type: DT_STRING
+      type: DT_INT64
     }
   }
   attr {
-    key: "value"
+    key: "shape"
     value {
-      tensor {
-        dtype: DT_STRING
-        tensor_shape {
-        }
-        string_val: "model"
+      shape {
       }
     }
   }
 }
 node {
-  name: "save/SaveV2/tensor_names"
-  op: "Const"
-  attr {
-    key: "dtype"
-    value {
-      type: DT_STRING
-    }
-  }
-  attr {
-    key: "value"
-    value {
-      tensor {
-        dtype: DT_STRING
-        tensor_shape {
-          dim {
-            size: 29
-          }
-        }
-        string_val: "Adam/beta_1"
-        string_val: "Adam/beta_2"
-        string_val: "Adam/decay"
-        string_val: "Adam/iterations"
-        string_val: "Adam/lr"
-        string_val: "dense_1/bias"
-        string_val: "dense_1/kernel"
-        string_val: "dense_2/bias"
-        string_val: "dense_2/kernel"
-        string_val: "dense_3/bias"
-        string_val: "dense_3/kernel"
-        string_val: "training/Adam/Variable"
-        string_val: "training/Adam/Variable_1"
-        string_val: "training/Adam/Variable_10"
-        string_val: "training/Adam/Variable_11"
-        string_val: "training/Adam/Variable_12"
-        string_val: "training/Adam/Variable_13"
-        string_val: "training/Adam/Variable_14"
-        string_val: "training/Adam/Variable_15"
-        string_val: "training/Adam/Variable_16"
-        string_val: "training/Adam/Variable_17"
-        string_val: "training/Adam/Variable_2"
-        string_val: "training/Adam/Variable_3"
-        string_val: "training/Adam/Variable_4"
-        string_val: "training/Adam/Variable_5"
-        string_val: "training/Adam/Variable_6"
-        string_val: "training/Adam/Variable_7"
-        string_val: "training/Adam/Variable_8"
-        string_val: "training/Adam/Variable_9"
-      }
-    }
-  }
-}
-node {
-  name: "save/SaveV2/shape_and_slices"
-  op: "Const"
-  attr {
-    key: "dtype"
-    value {
-      type: DT_STRING
-    }
-  }
-  attr {
-    key: "value"
-    value {
-      tensor {
-        dtype: DT_STRING
-        tensor_shape {
-          dim {
-            size: 29
-          }
-        }
-        string_val: ""
-        string_val: ""
-        string_val: ""
-        string_val: ""
-        string_val: ""
-        string_val: ""
-        string_val: ""
-        string_val: ""
-        string_val: ""
-        string_val: ""
-        string_val: ""
-        string_val: ""
-        string_val: ""
-        string_val: ""
-        string_val: ""
-        string_val: ""
-        string_val: ""
-        string_val: ""
-        string_val: ""
-        string_val: ""
-        string_val: ""
-        string_val: ""
-        string_val: ""
-        string_val: ""
-        string_val: ""
-        string_val: ""
-        string_val: ""
-        string_val: ""
-        string_val: ""
-      }
-    }
-  }
-}
-node {
-  name: "save/SaveV2"
-  op: "SaveV2"
-  input: "save/Const"
-  input: "save/SaveV2/tensor_names"
-  input: "save/SaveV2/shape_and_slices"
-  input: "Adam/beta_1"
-  input: "Adam/beta_2"
-  input: "Adam/decay"
-  input: "Adam/iterations"
-  input: "Adam/lr"
-  input: "dense_1/bias"
-  input: "dense_1/kernel"
-  input: "dense_2/bias"
-  input: "dense_2/kernel"
-  input: "dense_3/bias"
-  input: "dense_3/kernel"
-  input: "training/Adam/Variable"
-  input: "training/Adam/Variable_1"
-  input: "training/Adam/Variable_10"
-  input: "training/Adam/Variable_11"
-  input: "training/Adam/Variable_12"
-  input: "training/Adam/Variable_13"
-  input: "training/Adam/Variable_14"
-  input: "training/Adam/Variable_15"
-  input: "training/Adam/Variable_16"
-  input: "training/Adam/Variable_17"
-  input: "training/Adam/Variable_2"
-  input: "training/Adam/Variable_3"
-  input: "training/Adam/Variable_4"
-  input: "training/Adam/Variable_5"
-  input: "training/Adam/Variable_6"
-  input: "training/Adam/Variable_7"
-  input: "training/Adam/Variable_8"
-  input: "training/Adam/Variable_9"
-  attr {
-    key: "dtypes"
-    value {
-      list {
-        type: DT_FLOAT
-        type: DT_FLOAT
-        type: DT_FLOAT
-        type: DT_INT64
-        type: DT_FLOAT
-        type: DT_FLOAT
-        type: DT_FLOAT
-        type: DT_FLOAT
-        type: DT_FLOAT
-        type: DT_FLOAT
-        type: DT_FLOAT
-        type: DT_FLOAT
-        type: DT_FLOAT
-        type: DT_FLOAT
-        type: DT_FLOAT
-        type: DT_FLOAT
-        type: DT_FLOAT
-        type: DT_FLOAT
-        type: DT_FLOAT
-        type: DT_FLOAT
-        type: DT_FLOAT
-        type: DT_FLOAT
-        type: DT_FLOAT
-        type: DT_FLOAT
-        type: DT_FLOAT
-        type: DT_FLOAT
-        type: DT_FLOAT
-        type: DT_FLOAT
-        type: DT_FLOAT
-      }
-    }
-  }
-}
-node {
-  name: "save/control_dependency"
-  op: "Identity"
-  input: "save/Const"
-  input: "^save/SaveV2"
-  attr {
-    key: "T"
-    value {
-      type: DT_STRING
-    }
-  }
-  attr {
-    key: "_class"
-    value {
-      list {
-        s: "loc:@save/Const"
-      }
-    }
-  }
-}
-node {
-  name: "save/RestoreV2/tensor_names"
-  op: "Const"
-  device: "/device:CPU:0"
-  attr {
-    key: "dtype"
-    value {
-      type: DT_STRING
-    }
-  }
-  attr {
-    key: "value"
-    value {
-      tensor {
-        dtype: DT_STRING
-        tensor_shape {
-          dim {
-            size: 29
-          }
-        }
-        string_val: "Adam/beta_1"
-        string_val: "Adam/beta_2"
-        string_val: "Adam/decay"
-        string_val: "Adam/iterations"
-        string_val: "Adam/lr"
-        string_val: "dense_1/bias"
-        string_val: "dense_1/kernel"
-        string_val: "dense_2/bias"
-        string_val: "dense_2/kernel"
-        string_val: "dense_3/bias"
-        string_val: "dense_3/kernel"
-        string_val: "training/Adam/Variable"
-        string_val: "training/Adam/Variable_1"
-        string_val: "training/Adam/Variable_10"
-        string_val: "training/Adam/Variable_11"
-        string_val: "training/Adam/Variable_12"
-        string_val: "training/Adam/Variable_13"
-        string_val: "training/Adam/Variable_14"
-        string_val: "training/Adam/Variable_15"
-        string_val: "training/Adam/Variable_16"
-        string_val: "training/Adam/Variable_17"
-        string_val: "training/Adam/Variable_2"
-        string_val: "training/Adam/Variable_3"
-        string_val: "training/Adam/Variable_4"
-        string_val: "training/Adam/Variable_5"
-        string_val: "training/Adam/Variable_6"
-        string_val: "training/Adam/Variable_7"
-        string_val: "training/Adam/Variable_8"
-        string_val: "training/Adam/Variable_9"
-      }
-    }
-  }
-}
-node {
-  name: "save/RestoreV2/shape_and_slices"
-  op: "Const"
-  device: "/device:CPU:0"
-  attr {
-    key: "dtype"
-    value {
-      type: DT_STRING
-    }
-  }
-  attr {
-    key: "value"
-    value {
-      tensor {
-        dtype: DT_STRING
-        tensor_shape {
-          dim {
-            size: 29
-          }
-        }
-        string_val: ""
-        string_val: ""
-        string_val: ""
-        string_val: ""
-        string_val: ""
-        string_val: ""
-        string_val: ""
-        string_val: ""
-        string_val: ""
-        string_val: ""
-        string_val: ""
-        string_val: ""
-        string_val: ""
-        string_val: ""
-        string_val: ""
-        string_val: ""
-        string_val: ""
-        string_val: ""
-        string_val: ""
-        string_val: ""
-        string_val: ""
-        string_val: ""
-        string_val: ""
-        string_val: ""
-        string_val: ""
-        string_val: ""
-        string_val: ""
-        string_val: ""
-        string_val: ""
-      }
-    }
-  }
-}
-node {
-  name: "save/RestoreV2"
-  op: "RestoreV2"
-  input: "save/Const"
-  input: "save/RestoreV2/tensor_names"
-  input: "save/RestoreV2/shape_and_slices"
-  device: "/device:CPU:0"
-  attr {
-    key: "dtypes"
-    value {
-      list {
-        type: DT_FLOAT
-        type: DT_FLOAT
-        type: DT_FLOAT
-        type: DT_INT64
-        type: DT_FLOAT
-        type: DT_FLOAT
-        type: DT_FLOAT
-        type: DT_FLOAT
-        type: DT_FLOAT
-        type: DT_FLOAT
-        type: DT_FLOAT
-        type: DT_FLOAT
-        type: DT_FLOAT
-        type: DT_FLOAT
-        type: DT_FLOAT
-        type: DT_FLOAT
-        type: DT_FLOAT
-        type: DT_FLOAT
-        type: DT_FLOAT
-        type: DT_FLOAT
-        type: DT_FLOAT
-        type: DT_FLOAT
-        type: DT_FLOAT
-        type: DT_FLOAT
-        type: DT_FLOAT
-        type: DT_FLOAT
-        type: DT_FLOAT
-        type: DT_FLOAT
-        type: DT_FLOAT
-      }
-    }
-  }
-}
-node {
-  name: "save/Assign"
-  op: "Assign"
-  input: "Adam/beta_1"
-  input: "save/RestoreV2"
-  attr {
-    key: "T"
-    value {
-      type: DT_FLOAT
-    }
-  }
-  attr {
-    key: "_class"
-    value {
-      list {
-        s: "loc:@Adam/beta_1"
-      }
-    }
-  }
-  attr {
-    key: "use_locking"
-    value {
-      b: true
-    }
-  }
-  attr {
-    key: "validate_shape"
-    value {
-      b: true
-    }
-  }
-}
-node {
-  name: "save/Assign_1"
-  op: "Assign"
-  input: "Adam/beta_2"
-  input: "save/RestoreV2:1"
-  attr {
-    key: "T"
-    value {
-      type: DT_FLOAT
-    }
-  }
-  attr {
-    key: "_class"
-    value {
-      list {
-        s: "loc:@Adam/beta_2"
-      }
-    }
-  }
-  attr {
-    key: "use_locking"
-    value {
-      b: true
-    }
-  }
-  attr {
-    key: "validate_shape"
-    value {
-      b: true
-    }
-  }
-}
-node {
-  name: "save/Assign_2"
-  op: "Assign"
-  input: "Adam/decay"
-  input: "save/RestoreV2:2"
-  attr {
-    key: "T"
-    value {
-      type: DT_FLOAT
-    }
-  }
-  attr {
-    key: "_class"
-    value {
-      list {
-        s: "loc:@Adam/decay"
-      }
-    }
-  }
-  attr {
-    key: "use_locking"
-    value {
-      b: true
-    }
-  }
-  attr {
-    key: "validate_shape"
-    value {
-      b: true
-    }
-  }
-}
-node {
-  name: "save/Assign_3"
+  name: "Assign_6"
   op: "Assign"
   input: "Adam/iterations"
-  input: "save/RestoreV2:3"
+  input: "Placeholder_6"
   attr {
     key: "T"
     value {
@@ -13210,7 +13078,7 @@ node {
   attr {
     key: "use_locking"
     value {
-      b: true
+      b: false
     }
   }
   attr {
@@ -13221,234 +13089,33 @@ node {
   }
 }
 node {
-  name: "save/Assign_4"
-  op: "Assign"
-  input: "Adam/lr"
-  input: "save/RestoreV2:4"
+  name: "Placeholder_7"
+  op: "Placeholder"
   attr {
-    key: "T"
+    key: "dtype"
     value {
       type: DT_FLOAT
     }
   }
   attr {
-    key: "_class"
+    key: "shape"
     value {
-      list {
-        s: "loc:@Adam/lr"
+      shape {
+        dim {
+          size: 4
+        }
+        dim {
+          size: 12
+        }
       }
-    }
-  }
-  attr {
-    key: "use_locking"
-    value {
-      b: true
-    }
-  }
-  attr {
-    key: "validate_shape"
-    value {
-      b: true
     }
   }
 }
 node {
-  name: "save/Assign_5"
-  op: "Assign"
-  input: "dense_1/bias"
-  input: "save/RestoreV2:5"
-  attr {
-    key: "T"
-    value {
-      type: DT_FLOAT
-    }
-  }
-  attr {
-    key: "_class"
-    value {
-      list {
-        s: "loc:@dense_1/bias"
-      }
-    }
-  }
-  attr {
-    key: "use_locking"
-    value {
-      b: true
-    }
-  }
-  attr {
-    key: "validate_shape"
-    value {
-      b: true
-    }
-  }
-}
-node {
-  name: "save/Assign_6"
-  op: "Assign"
-  input: "dense_1/kernel"
-  input: "save/RestoreV2:6"
-  attr {
-    key: "T"
-    value {
-      type: DT_FLOAT
-    }
-  }
-  attr {
-    key: "_class"
-    value {
-      list {
-        s: "loc:@dense_1/kernel"
-      }
-    }
-  }
-  attr {
-    key: "use_locking"
-    value {
-      b: true
-    }
-  }
-  attr {
-    key: "validate_shape"
-    value {
-      b: true
-    }
-  }
-}
-node {
-  name: "save/Assign_7"
-  op: "Assign"
-  input: "dense_2/bias"
-  input: "save/RestoreV2:7"
-  attr {
-    key: "T"
-    value {
-      type: DT_FLOAT
-    }
-  }
-  attr {
-    key: "_class"
-    value {
-      list {
-        s: "loc:@dense_2/bias"
-      }
-    }
-  }
-  attr {
-    key: "use_locking"
-    value {
-      b: true
-    }
-  }
-  attr {
-    key: "validate_shape"
-    value {
-      b: true
-    }
-  }
-}
-node {
-  name: "save/Assign_8"
-  op: "Assign"
-  input: "dense_2/kernel"
-  input: "save/RestoreV2:8"
-  attr {
-    key: "T"
-    value {
-      type: DT_FLOAT
-    }
-  }
-  attr {
-    key: "_class"
-    value {
-      list {
-        s: "loc:@dense_2/kernel"
-      }
-    }
-  }
-  attr {
-    key: "use_locking"
-    value {
-      b: true
-    }
-  }
-  attr {
-    key: "validate_shape"
-    value {
-      b: true
-    }
-  }
-}
-node {
-  name: "save/Assign_9"
-  op: "Assign"
-  input: "dense_3/bias"
-  input: "save/RestoreV2:9"
-  attr {
-    key: "T"
-    value {
-      type: DT_FLOAT
-    }
-  }
-  attr {
-    key: "_class"
-    value {
-      list {
-        s: "loc:@dense_3/bias"
-      }
-    }
-  }
-  attr {
-    key: "use_locking"
-    value {
-      b: true
-    }
-  }
-  attr {
-    key: "validate_shape"
-    value {
-      b: true
-    }
-  }
-}
-node {
-  name: "save/Assign_10"
-  op: "Assign"
-  input: "dense_3/kernel"
-  input: "save/RestoreV2:10"
-  attr {
-    key: "T"
-    value {
-      type: DT_FLOAT
-    }
-  }
-  attr {
-    key: "_class"
-    value {
-      list {
-        s: "loc:@dense_3/kernel"
-      }
-    }
-  }
-  attr {
-    key: "use_locking"
-    value {
-      b: true
-    }
-  }
-  attr {
-    key: "validate_shape"
-    value {
-      b: true
-    }
-  }
-}
-node {
-  name: "save/Assign_11"
+  name: "Assign_7"
   op: "Assign"
   input: "training/Adam/Variable"
-  input: "save/RestoreV2:11"
+  input: "Placeholder_7"
   attr {
     key: "T"
     value {
@@ -13466,7 +13133,7 @@ node {
   attr {
     key: "use_locking"
     value {
-      b: true
+      b: false
     }
   }
   attr {
@@ -13477,10 +13144,30 @@ node {
   }
 }
 node {
-  name: "save/Assign_12"
+  name: "Placeholder_8"
+  op: "Placeholder"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "shape"
+    value {
+      shape {
+        dim {
+          size: 12
+        }
+      }
+    }
+  }
+}
+node {
+  name: "Assign_8"
   op: "Assign"
   input: "training/Adam/Variable_1"
-  input: "save/RestoreV2:12"
+  input: "Placeholder_8"
   attr {
     key: "T"
     value {
@@ -13498,7 +13185,7 @@ node {
   attr {
     key: "use_locking"
     value {
-      b: true
+      b: false
     }
   }
   attr {
@@ -13509,266 +13196,33 @@ node {
   }
 }
 node {
-  name: "save/Assign_13"
-  op: "Assign"
-  input: "training/Adam/Variable_10"
-  input: "save/RestoreV2:13"
+  name: "Placeholder_9"
+  op: "Placeholder"
   attr {
-    key: "T"
+    key: "dtype"
     value {
       type: DT_FLOAT
     }
   }
   attr {
-    key: "_class"
+    key: "shape"
     value {
-      list {
-        s: "loc:@training/Adam/Variable_10"
+      shape {
+        dim {
+          size: 12
+        }
+        dim {
+          size: 9
+        }
       }
-    }
-  }
-  attr {
-    key: "use_locking"
-    value {
-      b: true
-    }
-  }
-  attr {
-    key: "validate_shape"
-    value {
-      b: true
     }
   }
 }
 node {
-  name: "save/Assign_14"
-  op: "Assign"
-  input: "training/Adam/Variable_11"
-  input: "save/RestoreV2:14"
-  attr {
-    key: "T"
-    value {
-      type: DT_FLOAT
-    }
-  }
-  attr {
-    key: "_class"
-    value {
-      list {
-        s: "loc:@training/Adam/Variable_11"
-      }
-    }
-  }
-  attr {
-    key: "use_locking"
-    value {
-      b: true
-    }
-  }
-  attr {
-    key: "validate_shape"
-    value {
-      b: true
-    }
-  }
-}
-node {
-  name: "save/Assign_15"
-  op: "Assign"
-  input: "training/Adam/Variable_12"
-  input: "save/RestoreV2:15"
-  attr {
-    key: "T"
-    value {
-      type: DT_FLOAT
-    }
-  }
-  attr {
-    key: "_class"
-    value {
-      list {
-        s: "loc:@training/Adam/Variable_12"
-      }
-    }
-  }
-  attr {
-    key: "use_locking"
-    value {
-      b: true
-    }
-  }
-  attr {
-    key: "validate_shape"
-    value {
-      b: true
-    }
-  }
-}
-node {
-  name: "save/Assign_16"
-  op: "Assign"
-  input: "training/Adam/Variable_13"
-  input: "save/RestoreV2:16"
-  attr {
-    key: "T"
-    value {
-      type: DT_FLOAT
-    }
-  }
-  attr {
-    key: "_class"
-    value {
-      list {
-        s: "loc:@training/Adam/Variable_13"
-      }
-    }
-  }
-  attr {
-    key: "use_locking"
-    value {
-      b: true
-    }
-  }
-  attr {
-    key: "validate_shape"
-    value {
-      b: true
-    }
-  }
-}
-node {
-  name: "save/Assign_17"
-  op: "Assign"
-  input: "training/Adam/Variable_14"
-  input: "save/RestoreV2:17"
-  attr {
-    key: "T"
-    value {
-      type: DT_FLOAT
-    }
-  }
-  attr {
-    key: "_class"
-    value {
-      list {
-        s: "loc:@training/Adam/Variable_14"
-      }
-    }
-  }
-  attr {
-    key: "use_locking"
-    value {
-      b: true
-    }
-  }
-  attr {
-    key: "validate_shape"
-    value {
-      b: true
-    }
-  }
-}
-node {
-  name: "save/Assign_18"
-  op: "Assign"
-  input: "training/Adam/Variable_15"
-  input: "save/RestoreV2:18"
-  attr {
-    key: "T"
-    value {
-      type: DT_FLOAT
-    }
-  }
-  attr {
-    key: "_class"
-    value {
-      list {
-        s: "loc:@training/Adam/Variable_15"
-      }
-    }
-  }
-  attr {
-    key: "use_locking"
-    value {
-      b: true
-    }
-  }
-  attr {
-    key: "validate_shape"
-    value {
-      b: true
-    }
-  }
-}
-node {
-  name: "save/Assign_19"
-  op: "Assign"
-  input: "training/Adam/Variable_16"
-  input: "save/RestoreV2:19"
-  attr {
-    key: "T"
-    value {
-      type: DT_FLOAT
-    }
-  }
-  attr {
-    key: "_class"
-    value {
-      list {
-        s: "loc:@training/Adam/Variable_16"
-      }
-    }
-  }
-  attr {
-    key: "use_locking"
-    value {
-      b: true
-    }
-  }
-  attr {
-    key: "validate_shape"
-    value {
-      b: true
-    }
-  }
-}
-node {
-  name: "save/Assign_20"
-  op: "Assign"
-  input: "training/Adam/Variable_17"
-  input: "save/RestoreV2:20"
-  attr {
-    key: "T"
-    value {
-      type: DT_FLOAT
-    }
-  }
-  attr {
-    key: "_class"
-    value {
-      list {
-        s: "loc:@training/Adam/Variable_17"
-      }
-    }
-  }
-  attr {
-    key: "use_locking"
-    value {
-      b: true
-    }
-  }
-  attr {
-    key: "validate_shape"
-    value {
-      b: true
-    }
-  }
-}
-node {
-  name: "save/Assign_21"
+  name: "Assign_9"
   op: "Assign"
   input: "training/Adam/Variable_2"
-  input: "save/RestoreV2:21"
+  input: "Placeholder_9"
   attr {
     key: "T"
     value {
@@ -13786,7 +13240,7 @@ node {
   attr {
     key: "use_locking"
     value {
-      b: true
+      b: false
     }
   }
   attr {
@@ -13797,10 +13251,30 @@ node {
   }
 }
 node {
-  name: "save/Assign_22"
+  name: "Placeholder_10"
+  op: "Placeholder"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "shape"
+    value {
+      shape {
+        dim {
+          size: 9
+        }
+      }
+    }
+  }
+}
+node {
+  name: "Assign_10"
   op: "Assign"
   input: "training/Adam/Variable_3"
-  input: "save/RestoreV2:22"
+  input: "Placeholder_10"
   attr {
     key: "T"
     value {
@@ -13818,7 +13292,7 @@ node {
   attr {
     key: "use_locking"
     value {
-      b: true
+      b: false
     }
   }
   attr {
@@ -13829,10 +13303,33 @@ node {
   }
 }
 node {
-  name: "save/Assign_23"
+  name: "Placeholder_11"
+  op: "Placeholder"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "shape"
+    value {
+      shape {
+        dim {
+          size: 9
+        }
+        dim {
+          size: 1
+        }
+      }
+    }
+  }
+}
+node {
+  name: "Assign_11"
   op: "Assign"
   input: "training/Adam/Variable_4"
-  input: "save/RestoreV2:23"
+  input: "Placeholder_11"
   attr {
     key: "T"
     value {
@@ -13850,7 +13347,7 @@ node {
   attr {
     key: "use_locking"
     value {
-      b: true
+      b: false
     }
   }
   attr {
@@ -13861,10 +13358,30 @@ node {
   }
 }
 node {
-  name: "save/Assign_24"
+  name: "Placeholder_12"
+  op: "Placeholder"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "shape"
+    value {
+      shape {
+        dim {
+          size: 1
+        }
+      }
+    }
+  }
+}
+node {
+  name: "Assign_12"
   op: "Assign"
   input: "training/Adam/Variable_5"
-  input: "save/RestoreV2:24"
+  input: "Placeholder_12"
   attr {
     key: "T"
     value {
@@ -13882,7 +13399,7 @@ node {
   attr {
     key: "use_locking"
     value {
-      b: true
+      b: false
     }
   }
   attr {
@@ -13893,10 +13410,33 @@ node {
   }
 }
 node {
-  name: "save/Assign_25"
+  name: "Placeholder_13"
+  op: "Placeholder"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "shape"
+    value {
+      shape {
+        dim {
+          size: 4
+        }
+        dim {
+          size: 12
+        }
+      }
+    }
+  }
+}
+node {
+  name: "Assign_13"
   op: "Assign"
   input: "training/Adam/Variable_6"
-  input: "save/RestoreV2:25"
+  input: "Placeholder_13"
   attr {
     key: "T"
     value {
@@ -13914,7 +13454,7 @@ node {
   attr {
     key: "use_locking"
     value {
-      b: true
+      b: false
     }
   }
   attr {
@@ -13925,10 +13465,30 @@ node {
   }
 }
 node {
-  name: "save/Assign_26"
+  name: "Placeholder_14"
+  op: "Placeholder"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "shape"
+    value {
+      shape {
+        dim {
+          size: 12
+        }
+      }
+    }
+  }
+}
+node {
+  name: "Assign_14"
   op: "Assign"
   input: "training/Adam/Variable_7"
-  input: "save/RestoreV2:26"
+  input: "Placeholder_14"
   attr {
     key: "T"
     value {
@@ -13946,7 +13506,7 @@ node {
   attr {
     key: "use_locking"
     value {
-      b: true
+      b: false
     }
   }
   attr {
@@ -13957,10 +13517,33 @@ node {
   }
 }
 node {
-  name: "save/Assign_27"
+  name: "Placeholder_15"
+  op: "Placeholder"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "shape"
+    value {
+      shape {
+        dim {
+          size: 12
+        }
+        dim {
+          size: 9
+        }
+      }
+    }
+  }
+}
+node {
+  name: "Assign_15"
   op: "Assign"
   input: "training/Adam/Variable_8"
-  input: "save/RestoreV2:27"
+  input: "Placeholder_15"
   attr {
     key: "T"
     value {
@@ -13978,7 +13561,7 @@ node {
   attr {
     key: "use_locking"
     value {
-      b: true
+      b: false
     }
   }
   attr {
@@ -13989,10 +13572,30 @@ node {
   }
 }
 node {
-  name: "save/Assign_28"
+  name: "Placeholder_16"
+  op: "Placeholder"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "shape"
+    value {
+      shape {
+        dim {
+          size: 9
+        }
+      }
+    }
+  }
+}
+node {
+  name: "Assign_16"
   op: "Assign"
   input: "training/Adam/Variable_9"
-  input: "save/RestoreV2:28"
+  input: "Placeholder_16"
   attr {
     key: "T"
     value {
@@ -14010,7 +13613,7 @@ node {
   attr {
     key: "use_locking"
     value {
-      b: true
+      b: false
     }
   }
   attr {
@@ -14021,37 +13624,434 @@ node {
   }
 }
 node {
-  name: "save/restore_all"
-  op: "NoOp"
-  input: "^save/Assign"
-  input: "^save/Assign_1"
-  input: "^save/Assign_10"
-  input: "^save/Assign_11"
-  input: "^save/Assign_12"
-  input: "^save/Assign_13"
-  input: "^save/Assign_14"
-  input: "^save/Assign_15"
-  input: "^save/Assign_16"
-  input: "^save/Assign_17"
-  input: "^save/Assign_18"
-  input: "^save/Assign_19"
-  input: "^save/Assign_2"
-  input: "^save/Assign_20"
-  input: "^save/Assign_21"
-  input: "^save/Assign_22"
-  input: "^save/Assign_23"
-  input: "^save/Assign_24"
-  input: "^save/Assign_25"
-  input: "^save/Assign_26"
-  input: "^save/Assign_27"
-  input: "^save/Assign_28"
-  input: "^save/Assign_3"
-  input: "^save/Assign_4"
-  input: "^save/Assign_5"
-  input: "^save/Assign_6"
-  input: "^save/Assign_7"
-  input: "^save/Assign_8"
-  input: "^save/Assign_9"
+  name: "Placeholder_17"
+  op: "Placeholder"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "shape"
+    value {
+      shape {
+        dim {
+          size: 9
+        }
+        dim {
+          size: 1
+        }
+      }
+    }
+  }
+}
+node {
+  name: "Assign_17"
+  op: "Assign"
+  input: "training/Adam/Variable_10"
+  input: "Placeholder_17"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@training/Adam/Variable_10"
+      }
+    }
+  }
+  attr {
+    key: "use_locking"
+    value {
+      b: false
+    }
+  }
+  attr {
+    key: "validate_shape"
+    value {
+      b: true
+    }
+  }
+}
+node {
+  name: "Placeholder_18"
+  op: "Placeholder"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "shape"
+    value {
+      shape {
+        dim {
+          size: 1
+        }
+      }
+    }
+  }
+}
+node {
+  name: "Assign_18"
+  op: "Assign"
+  input: "training/Adam/Variable_11"
+  input: "Placeholder_18"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@training/Adam/Variable_11"
+      }
+    }
+  }
+  attr {
+    key: "use_locking"
+    value {
+      b: false
+    }
+  }
+  attr {
+    key: "validate_shape"
+    value {
+      b: true
+    }
+  }
+}
+node {
+  name: "Placeholder_19"
+  op: "Placeholder"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "shape"
+    value {
+      shape {
+        dim {
+          size: 1
+        }
+      }
+    }
+  }
+}
+node {
+  name: "Assign_19"
+  op: "Assign"
+  input: "training/Adam/Variable_12"
+  input: "Placeholder_19"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@training/Adam/Variable_12"
+      }
+    }
+  }
+  attr {
+    key: "use_locking"
+    value {
+      b: false
+    }
+  }
+  attr {
+    key: "validate_shape"
+    value {
+      b: true
+    }
+  }
+}
+node {
+  name: "Placeholder_20"
+  op: "Placeholder"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "shape"
+    value {
+      shape {
+        dim {
+          size: 1
+        }
+      }
+    }
+  }
+}
+node {
+  name: "Assign_20"
+  op: "Assign"
+  input: "training/Adam/Variable_13"
+  input: "Placeholder_20"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@training/Adam/Variable_13"
+      }
+    }
+  }
+  attr {
+    key: "use_locking"
+    value {
+      b: false
+    }
+  }
+  attr {
+    key: "validate_shape"
+    value {
+      b: true
+    }
+  }
+}
+node {
+  name: "Placeholder_21"
+  op: "Placeholder"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "shape"
+    value {
+      shape {
+        dim {
+          size: 1
+        }
+      }
+    }
+  }
+}
+node {
+  name: "Assign_21"
+  op: "Assign"
+  input: "training/Adam/Variable_14"
+  input: "Placeholder_21"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@training/Adam/Variable_14"
+      }
+    }
+  }
+  attr {
+    key: "use_locking"
+    value {
+      b: false
+    }
+  }
+  attr {
+    key: "validate_shape"
+    value {
+      b: true
+    }
+  }
+}
+node {
+  name: "Placeholder_22"
+  op: "Placeholder"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "shape"
+    value {
+      shape {
+        dim {
+          size: 1
+        }
+      }
+    }
+  }
+}
+node {
+  name: "Assign_22"
+  op: "Assign"
+  input: "training/Adam/Variable_15"
+  input: "Placeholder_22"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@training/Adam/Variable_15"
+      }
+    }
+  }
+  attr {
+    key: "use_locking"
+    value {
+      b: false
+    }
+  }
+  attr {
+    key: "validate_shape"
+    value {
+      b: true
+    }
+  }
+}
+node {
+  name: "Placeholder_23"
+  op: "Placeholder"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "shape"
+    value {
+      shape {
+        dim {
+          size: 1
+        }
+      }
+    }
+  }
+}
+node {
+  name: "Assign_23"
+  op: "Assign"
+  input: "training/Adam/Variable_16"
+  input: "Placeholder_23"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@training/Adam/Variable_16"
+      }
+    }
+  }
+  attr {
+    key: "use_locking"
+    value {
+      b: false
+    }
+  }
+  attr {
+    key: "validate_shape"
+    value {
+      b: true
+    }
+  }
+}
+node {
+  name: "Placeholder_24"
+  op: "Placeholder"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "shape"
+    value {
+      shape {
+        dim {
+          size: 1
+        }
+      }
+    }
+  }
+}
+node {
+  name: "Assign_24"
+  op: "Assign"
+  input: "training/Adam/Variable_17"
+  input: "Placeholder_24"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@training/Adam/Variable_17"
+      }
+    }
+  }
+  attr {
+    key: "use_locking"
+    value {
+      b: false
+    }
+  }
+  attr {
+    key: "validate_shape"
+    value {
+      b: true
+    }
+  }
+}
+node {
+  name: "output_node0"
+  op: "Identity"
+  input: "dense_3/Sigmoid"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
 }
 versions {
   producer: 26
