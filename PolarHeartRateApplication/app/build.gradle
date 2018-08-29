@@ -33,7 +33,7 @@ dependencies {
     implementation 'com.google.gms:google-services:3.2.0'
     implementation 'org.tensorflow:tensorflow-android:+'
     implementation 'com.google.guava:guava:20.0'
-
+    implementation files('libs/hrv-lib.jar')
 }
 
 apply plugin: 'com.google.gms.google-services'

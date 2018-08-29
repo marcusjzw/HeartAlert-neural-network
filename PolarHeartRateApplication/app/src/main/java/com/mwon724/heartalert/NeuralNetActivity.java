@@ -23,10 +23,9 @@ import units.TimeUnit;
 
 public class NeuralNetActivity extends Activity{
     private static final String TAG = "NeuralNetActivity";
-    private static final String MODEL_FILE = "file:///android_asset/opt_vt_classification_tf.pb";
+    private static final String MODEL_FILE = "file:///android_asset/vt_classifier_75percent.pb";
     private static final String INPUT_NODE = "dense_1_input";
-    private static final String[] OUTPUT_NODES = {"dense_3/Sigmoid"};
-    private static final String OUTPUT_NODE = "dense_3/Sigmoid";
+    private static final String OUTPUT_NODE = "output_node0";
     private TensorFlowInferenceInterface inferenceInterface;
 
     private static final long[] INPUT_SIZE = {1,70};
@@ -63,7 +62,6 @@ public class NeuralNetActivity extends Activity{
         }
 
         // fetch prediction from .pb
-        float[] result = new float[1];
         // inferenceInterface.feed(INPUT_NODE, rriIntArray, INPUT_SIZE);
         // inferenceInterface.run(OUTPUT_NODES);
         // inferenceInterface.fetch(OUTPUT_NODE, result);
