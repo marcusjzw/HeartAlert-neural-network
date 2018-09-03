@@ -149,14 +149,14 @@ public class MainActivity extends Activity implements OnItemSelectedListener, Ob
     }
 
     /**
-     * Run on startup to list bluetooth paired device
+     * Run on startup to list bluetooth paired devices + other devices
      */
     public void listBT() {
         Log.d("Main Activity", "Listing BT elements");
         if (searchBt) {
             //Discover bluetooth devices
             final List<String> list = new ArrayList<>();
-            list.add("");
+            list.add("Select...");
             pairedDevices.addAll(mBluetoothAdapter.getBondedDevices());
             // If there are paired devices
             if (pairedDevices.size() > 0) {

@@ -58,7 +58,14 @@ public class NeuralNetActivity extends Activity{
         inferenceInterface.feed(INPUT_NODE, hrvParameterArray, 1, 4);
         inferenceInterface.run(new String[] {OUTPUT_NODE});
         inferenceInterface.fetch(OUTPUT_NODE, classifierResult);
-        rriValuesReceived.append("\n\n\n\nRESULT: " + classifierResult[0]);
+        String labelResult;
+        if (classifierResult[0] == 1) {
+            labelResult = "The onset of ventricular tachycardia has been detected. Call emergency services?";
+        }
+        else {
+            labelResult = "No anomalies detected.\n";
+        }
+        rriValuesReceived.append("\n\n\n\nRESULT: " + labelResult);
     }
 
     protected List<HRVParameter> freqParamCalculation(int[] rriValues) {

@@ -3,29 +3,10 @@ package com.mwon724.heartalert;
 import android.util.Log;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Observable;
 
 import com.androidplot.xy.SimpleXYSeries;
 
-/**
- * This handler decodes data from the belt
- * From docs:
- *   Hdr Len Chk Seq Status HeartRate RRInterval_16-bits
- *    FE  08  F7  06   F1      48          03 64
- *   where; 
- *      Hdr always = 254 (0xFE), 
- *      Chk = 255 - Len
- *      Seq range 0 to 15
- *      Status = Upper nibble may be battery voltage,
- *               bit 0 is Beat Detection flag.
- *               
- *   src:http://ww.telent.net/2012/5/3/listening_to_a_polar_bluetooth_hrm_in_linux
- *   
- *   
- *
- *
- */
 public class DataHandler extends Observable{
 	private static DataHandler dd = new DataHandler(); // singleton pattern to force one data handler
     private DataHandler(){ }
@@ -40,14 +21,10 @@ public class DataHandler extends Observable{
 	H7ConnectThread H7;
 	
 	int pos = 0;
-	int rriVal = 0; //incoming HRM value
+	int rriVal = 0; //incoming  value
 	int totalValuesReceived = 0; // counts how many values have been sent by belt
 
     ArrayList rriValuesList = new ArrayList<>();
-	
-	//for averaging
-	int data = 0;
-	int total = 0;
 
 	int id;
 

@@ -5,7 +5,7 @@ function [] = plot_hrv_freq_spectrum( ax, plot_data, varargin )
 %
 
 %% Input
-SUPPORTED_METHODS = {'Lomb', 'AR', 'Welch', 'FFT'};
+SUPPORTED_METHODS = {'Welch'};
 
 p = inputParser;
 p.addRequired('ax', @(x) isgraphics(x, 'axes'));
