@@ -19,6 +19,7 @@ public class DataHandler extends Observable{
 	SimpleXYSeries series1;
 	ConnectThread reader;
 	H7ConnectThread H7;
+	int bpm;
 	
 	int pos = 0;
 	int rriVal = 0; //incoming  value
@@ -43,6 +44,12 @@ public class DataHandler extends Observable{
 		totalValuesReceived++;
 		rriValuesList.add(val);
         Log.i("DataHandler", "RRI Value detected: " + String.valueOf(rriVal));
+		setChanged(); // must call this before notifying observers, marks hasChanged() to true
+		notifyObservers(); // notify all observers, causing them to be notified by calling their update()
+	}
+	public void cleanBPMInput(int val){
+		bpm = val;
+		Log.i("DataHandler", "BPM Value detected: " + String.valueOf(val));
 		setChanged(); // must call this before notifying observers, marks hasChanged() to true
 		notifyObservers(); // notify all observers, causing them to be notified by calling their update()
 	}
@@ -78,6 +85,7 @@ public class DataHandler extends Observable{
 	// RRI Value List + Occurrence Tracking Getters/Setters
     public int getTotalValuesReceived() { return totalValuesReceived;}
     public ArrayList getRRIValuesList() { return rriValuesList;}
+    public int getBPMValue() { return bpm;}
     public void clearTotalValuesReceived() {totalValuesReceived = 0;}
     public void clearRRIValuesList() {rriValuesList.clear();}
 	

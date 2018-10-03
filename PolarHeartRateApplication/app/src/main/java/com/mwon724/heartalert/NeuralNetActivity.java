@@ -1,16 +1,21 @@
 package com.mwon724.heartalert;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import org.apache.commons.math3.util.Precision;
 import org.tensorflow.contrib.android.*;
 import com.google.common.primitives.Ints;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
@@ -31,9 +36,10 @@ public class NeuralNetActivity extends Activity{
 
     List rriValuesList = new ArrayList<>();
     TextView rriValuesReceived;
-    // TensorFlowInferenceInterface tensorflow = new TensorFlowInferenceInterface(getAssets(), "file:///android_asset/opt_vt_classification_tf.pb");
 
     protected void onCreate(Bundle savedInstanceState) {
+        ActionBar bar = getActionBar();
+        bar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#00C4CD")));
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_neural);
         Log.d(TAG, "onCreate: Neural Screen Entered");
@@ -48,8 +54,9 @@ public class NeuralNetActivity extends Activity{
         float[] hrvParameterArray = {0, 0, 0, 0};
         List<HRVParameter> hrvParameterList = freqParamCalculation(rriIntArray);
         for (int i = 0; i < 4; i++) {
+            BigDecimal bd = new BigDecimal(hrvParameterList.get(i).getValue());
             rriValuesReceived.append("\n"+hrvParameterList.get(i).getName()+": " +
-                    hrvParameterList.get(i).getValue());
+                    bd.setScale(2, BigDecimal.ROUND_HALF_EVEN).toString());
             hrvParameterArray[i] = (float)hrvParameterList.get(i).getValue();
         }
 

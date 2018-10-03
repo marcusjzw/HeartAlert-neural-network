@@ -82,6 +82,6 @@ model.save_weights('vt_classification_model_weights75PERCENT.h5')
 predictions = model.predict(inputs)
 # round predictions (due to sigmoid as output layer)
 rounded_predictions = [round(inputs[0]) for inputs in predictions]
-print(rounded_predictions)
-
+# print(rounded_predictions)
+print(predictions)
 export_model(tf.train.Saver(), ["dense_1_input", "dense_2/Relu"], "dense_3/Sigmoid")

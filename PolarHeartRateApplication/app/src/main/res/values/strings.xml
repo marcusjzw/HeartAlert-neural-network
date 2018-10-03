@@ -20,8 +20,7 @@
         \n\n
         Heart rate anomaly detection is conducted via a trained back-propagation neural network. Data
         is gathered from Physionet, with samples containing the 1024 RR Intervals before the onset of ventricular
-        tachycardia. From research, this allows a 10 second buffer time between the prediction of onset
-        and actual condition, which should give time to call emergency services.
+        tachycardia. From research, this ultimately gives a 52 second buffer time from detection to callout.
         \n\n
         Ventricular tachycardia is an important condition to detect because it naturally leads to
         life-threatening conditions such as ventricular fibrillation, in which late detection poses

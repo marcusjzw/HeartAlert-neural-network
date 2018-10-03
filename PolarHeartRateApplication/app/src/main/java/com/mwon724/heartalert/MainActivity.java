@@ -11,6 +11,7 @@ import com.androidplot.xy.PointLabelFormatter;
 import com.androidplot.xy.XYPlot;
 import com.androidplot.xy.SimpleXYSeries;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.bluetooth.BluetoothAdapter;
@@ -18,6 +19,7 @@ import android.bluetooth.BluetoothDevice;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
@@ -48,11 +50,13 @@ public class MainActivity extends Activity implements OnItemSelectedListener, Ob
     boolean normal = false; //Was the BT tested
     private Spinner deviceDropdown;
     TextView totalValuesReceived;
-    TextView rriHistory;
+    TextView bpmHistory;
     Button analyseButton;
 
 
     protected void onCreate(Bundle savedInstanceState) {
+        ActionBar bar = getActionBar();
+        bar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#00C4CD")));
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Log.i("Main Activity", "Starting Polar HR monitor main activity");
@@ -218,7 +222,7 @@ public class MainActivity extends Activity implements OnItemSelectedListener, Ob
         if (id == R.id.action_settings) { //close connection
             menuBool = false;
             Log.d("Main Activity", "disable pressed");
-            rriHistory.setText(""); // reset ScrollView
+            bpmHistory.setText(""); // reset ScrollView
             totalValuesReceived.setText("Total Values: ");
             if (deviceDropdown != null) {
                 deviceDropdown.setSelection(0);
@@ -343,8 +347,8 @@ public class MainActivity extends Activity implements OnItemSelectedListener, Ob
                 totalValuesReceived = (TextView) findViewById(R.id.totalValuesView);
                 totalValuesReceived.setText("Total Values: " + String.valueOf(DataHandler.getInstance().getTotalValuesReceived()));
 
-                rriHistory = (TextView) findViewById(R.id.textViewRRI);
-                rriHistory.append("\n" + String.valueOf(DataHandler.getInstance().getRRIValuesList()));
+                bpmHistory = (TextView) findViewById(R.id.textViewRRI);
+                bpmHistory.setText("BPM: " + String.valueOf(DataHandler.getInstance().getBPMValue()));
 
                 if (DataHandler.getInstance().getTotalValuesReceived() < 60) { // restrict analysis if readings < 1 min
                     analyseButton.setAlpha(.5f);

@@ -55,12 +55,14 @@ public class H7ConnectThread  extends Thread{
 		@Override
 	    public void onCharacteristicChanged(BluetoothGatt gatt, final BluetoothGattCharacteristic characteristic) {
 			Integer[] intervals = extractRRInterval(characteristic);
+			int bpm = extractBPM(characteristic);
 			if (intervals == null) { // happens on the first few RRI
 				Log.d(TAG, "onCharacteristicChanged: No intervals detected (yet)");
 				return;
 			}
 			for (int i = 0; i < intervals.length; i++) {
 				DataHandler.getInstance().cleanInput(intervals[i]);
+				DataHandler.getInstance().cleanBPMInput(bpm);
 				Log.d("H7ConnectThread", "onCharacteristicChanged, Received RR:" +  intervals[i]);
 			}
 	    }
@@ -106,6 +108,19 @@ public class H7ConnectThread  extends Thread{
 				}
 	    }
 	};
+
+	private int extractBPM(BluetoothGattCharacteristic characteristic) {
+		int flag = characteristic.getProperties();
+		int format = -1;
+		if ((flag & 0x01) != 0) {
+			format = BluetoothGattCharacteristic.FORMAT_UINT16;
+			Log.d(TAG, "Heart rate format UINT16.");
+		} else {
+			format = BluetoothGattCharacteristic.FORMAT_UINT8;
+			Log.d(TAG, "Heart rate format UINT8.");
+		}
+		return characteristic.getIntValue(format, 1);
+	}
 
 	private static Integer[] extractRRInterval(
 			BluetoothGattCharacteristic characteristic) {

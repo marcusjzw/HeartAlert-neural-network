@@ -10,9 +10,6 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> <!-- for Binder call-->
 
     <!--@
-    TODO take care og the backup thing More info: https://developer.android.com/preview/backup/index.html (at line 12)
-    TODO App is not indexable by Google Search; consider adding at least one Activity with an ACTION-VIEW intent-filler. See issue explanation for more details. (at line 17)
-
     FIX the two things in tools:ignore
     -->
     <application
