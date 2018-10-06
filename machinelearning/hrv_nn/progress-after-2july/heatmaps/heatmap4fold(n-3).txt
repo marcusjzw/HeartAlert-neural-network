@@ -6,7 +6,7 @@ Hidden neurons: 11
 Accuracy:  89.54% 
 SD: 4.88%
 Hidden neurons: 12 
-Accuracy:  92.50% 
+Accuracy:  95.42% 
 SD: 2.50%
 Hidden neurons: 13 
 Accuracy:  51.13% 
