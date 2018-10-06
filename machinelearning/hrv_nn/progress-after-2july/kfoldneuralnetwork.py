@@ -13,7 +13,7 @@ for hidden_layer_neurons in range(10, 25):
     # split into input and output variables from splicing csv data
     inputs = dataset[:,1:5] # take the 4 input params (element 1 to 4)
     outputs = dataset[:,5] # one output, the outcome
-    # define 10-fold cross validation test harness
+    # define 4-fold cross validation test harness
     kfold = StratifiedKFold(n_splits=4, shuffle=True, random_state=seed)
     cvscores = []
     for train, test in kfold.split(inputs, outputs):
