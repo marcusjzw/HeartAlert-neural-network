@@ -14,7 +14,7 @@ public class DataHandler extends Observable{
     public static DataHandler getInstance(){
         return dd;
     }
-
+	boolean spoofer = false;
     boolean newValue = true;
 	SimpleXYSeries series1;
 	ConnectThread reader;
@@ -78,6 +78,8 @@ public class DataHandler extends Observable{
 	public void setH7(H7ConnectThread H7){
 		this.H7=H7;
 	}
+	public void setSpoofer(boolean bool) { spoofer = bool;}
+	public boolean getSpooferStatus() { return spoofer;}
 	public H7ConnectThread getH7(){
 		return H7;
 	}

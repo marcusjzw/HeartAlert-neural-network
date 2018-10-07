@@ -2,16 +2,12 @@ package com.mwon724.heartalert;
 
 import android.app.ActionBar;
 import android.app.Activity;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
+import android.util.TimingLogger;
 import android.widget.TextView;
-
-import org.apache.commons.math3.util.Precision;
 import org.tensorflow.contrib.android.*;
 import com.google.common.primitives.Ints;
 
@@ -19,7 +15,6 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
-import java.nio.*;
 
 import hrv.HRVLibFacade;
 import hrv.RRData;
@@ -43,6 +38,7 @@ public class NeuralNetActivity extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_neural);
         Log.d(TAG, "onCreate: Neural Screen Entered");
+        TimingLogger timings = new TimingLogger(TAG, "NN-log");
         inferenceInterface = new TensorFlowInferenceInterface(getAssets(), MODEL_FILE);
         rriValuesList = getIntent().getStringArrayListExtra("RRI_VALUES");
         int[] rriIntArray = Ints.toArray(rriValuesList); // convert Integer list to primitive array
@@ -59,7 +55,7 @@ public class NeuralNetActivity extends Activity{
                     bd.setScale(2, BigDecimal.ROUND_HALF_EVEN).toString());
             hrvParameterArray[i] = (float)hrvParameterList.get(i).getValue();
         }
-
+        timings.addSplit("finished HRV calc");
         // fetch prediction from .pb
         float[] classifierResult = new float[1];
         inferenceInterface.feed(INPUT_NODE, hrvParameterArray, 1, 4);
@@ -73,6 +69,8 @@ public class NeuralNetActivity extends Activity{
             labelResult = "No anomalies detected.\n";
         }
         rriValuesReceived.append("\n\n\n\nRESULT: " + labelResult);
+        timings.addSplit("finished NN predict");
+        timings.dumpToLog();
     }
 
     protected List<HRVParameter> freqParamCalculation(int[] rriValues) {

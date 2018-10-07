@@ -56,6 +56,13 @@ public class H7ConnectThread  extends Thread{
 	    public void onCharacteristicChanged(BluetoothGatt gatt, final BluetoothGattCharacteristic characteristic) {
 			Integer[] intervals = extractRRInterval(characteristic);
 			int bpm = extractBPM(characteristic);
+			Log.d("H7ConnectThread", "onCharacteristicChanged, Received BPM: " + String.valueOf(bpm));
+			if (DataHandler.getInstance().getSpooferStatus() == true) {
+				Log.d(TAG, "onCharacteristicChanged: spoof true, clean input from BPM instead of RRI");
+				DataHandler.getInstance().cleanInput(bpm);
+				Log.d("H7ConnectThread", "onCharacteristicChanged, Received RR:" +  bpm);
+				return;
+			}
 			if (intervals == null) { // happens on the first few RRI
 				Log.d(TAG, "onCharacteristicChanged: No intervals detected (yet)");
 				return;

@@ -4,7 +4,7 @@
     <string name="app_name">HeartAlert: Emergency Callouts</string>
     <string name="selectDevice">Select BLE Device (Polar H7 or NRF52 Kit)</string>
     <string name="action_settings">Disconnect BLE Device</string>
-    <string name="couldnotconnect">Sorry, an error occurred while connecting to the device</string>
+    <string name="couldnotconnect">Sorry, this device is not a Polar H7. Restarting for other HRS devices...</string>
     <string name="bluetooth">Bluetooth LE</string>
     <string name="bluetoothOff">BluetoothAdapter is off, would you like to turn it on?</string>
     <string name="rpm">RRI </string>

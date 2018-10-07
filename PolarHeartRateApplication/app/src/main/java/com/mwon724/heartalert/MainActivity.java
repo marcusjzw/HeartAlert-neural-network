@@ -272,7 +272,7 @@ public class MainActivity extends Activity implements OnItemSelectedListener, Ob
                 h7 = true;
             } else if (!normal && DataHandler.getInstance().getH7() == null) {
 
-                Log.i("Main Activity", "Starting normal");
+                Log.i("Main Activity", "H7 NOT DETECTED");
                 DataHandler.getInstance().setReader(new ConnectThread((BluetoothDevice) pairedDevices.toArray()[arg2 - 1], this));
                 DataHandler.getInstance().getReader().start();
                 normal = true;
@@ -301,7 +301,6 @@ public class MainActivity extends Activity implements OnItemSelectedListener, Ob
 
         Log.w("Main Activity", "Connection error occured");
         if (menuBool) {//did not manually try to disconnect
-            Log.d("Main Activity", "in the app");
             menuBool = false;
             final MainActivity ac = this;
             runOnUiThread(new Runnable() {
@@ -313,9 +312,11 @@ public class MainActivity extends Activity implements OnItemSelectedListener, Ob
                         deviceDropdown.setSelection(DataHandler.getInstance().getID());
 
                     if (!h7) {
-                        Log.w("Main Activity", "starting H7 after error");
+                        Log.w("Main Activity", "starting spoofer discovery since h7 not connected");
                         DataHandler.getInstance().setReader(null);
                         DataHandler.getInstance().setH7(new H7ConnectThread((BluetoothDevice) pairedDevices.toArray()[DataHandler.getInstance().getID() - 1], ac));
+                        DataHandler.getInstance().setSpoofer(true);
+                        Log.w("Main Activity", "spoof on");
                         h7 = true;
                     } else if (!normal) {
                         Log.w("Main Activity", "Starting normal after error");
