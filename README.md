@@ -2,7 +2,7 @@
 This is project #97 of the 2018 University of Auckland ECE Part IV projects. The intent of this research is
 to provide an automated emergency callout system for heart disease patients in life threatening events. 
 
-NOTE: For more details on each folder, please view the README in their respective folders
+_NOTE: For more details on each folder, please view the README in their respective folders._
 
 This repository contains:
 1. `/signalprocessing`, contains Python scripts that preprocess Physionet datasets. This involves conversion of .vt and .qrs files into .txt R-R interval files, as well as use of the Python hrv library to convert samples to frequency domain HRV. Scripts for parsing data into .csv format are also included.  Two datasets used: normal sinus rhythm database, Spontaneous Ventricular Tachyarrhythmia Database. Other files were the result of experimentation with the Pan-Tompkins algorithm and Matlab code to convert ECG signals to HRV; this is not used in the final implementation
