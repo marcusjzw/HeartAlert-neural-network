@@ -2,38 +2,28 @@
 This is project #97 of the 2018 University of Auckland ECE Part IV projects. The intent of this research is
 to provide an automated emergency callout system for heart disease patients in life threatening events. 
 
-Our repository contains:
-1. `/signalprocessing`, contains wfdb and MATLAB code to preprocess Physionet datasets. This involves the detection of R-R intervals using a QRS detection algorithm, finding ectopic beats, and calculating power spectral density using the Lomb periodogram (ideal for non-uniform samples). Time domain, frequency domain and non-linear metircs were output via MATLAB. Previous attempts at correcting and then using a uniform method of calculation (like the Fast Fourier Transform) was not successful. The correction step was necessary to avoid garbage frequency domain values, which is highly sensitive to noise artifacts/random spikes. Two datasets used: nsrdb, cudb - normal sinus rhythm database, Creighton University Ventricular Tachyarrhythmia Database
-2. `/machinelearning`, code to work the back propogation neural network. 3 inputs proposed (LF, HF, LF/HF), 2 outputs (NSR or VT/VF). One middle layer with 15 neurons, using gradient descent with cost functions to learn. This is a virtualenv environment, so make sure you have that.
-3. `/apps`, code regarding the interim PC app milestone + Android smartphone app code
+NOTE: For more details on each folder, please view the README in their respective folders
+
+This repository contains:
+1. `/signalprocessing`, contains Python scripts that preprocess Physionet datasets. This involves conversion of .vt and .qrs files into .txt R-R interval files, as well as use of the Python hrv library to convert samples to frequency domain HRV. Scripts for parsing data into .csv format are also included.  Two datasets used: normal sinus rhythm database, Spontaneous Ventricular Tachyarrhythmia Database. Other files were the result of experimentation with the Pan-Tompkins algorithm and Matlab code to convert ECG signals to HRV; this is not used in the final implementation
+2. `/machinelearning`, This is a virtualenv environment, so make sure the virtualenv commands (seen under 'Important notes') have been enabled. Contains the files to run the HRV neural network trained in this project, using Keras. K-fold cross validation was done via scikit-learn, and different data analysis/processing tools like numpy/pandas have been used for data output.
+3. `/PolarHeartRateApplication`, code regarding the Android app developed for automated emergency callouts. Run this code using Android Studio. 
+4. `/bluetooth-le-spoofer`, contains the mbedOS files used to program the nRF52-DK. Use of the mbedOS platform is required in order to test this.
 
 # Important notes
-To get virtualenv + other dependencies (it's too big to put all on git) then use this command:
+1. To get virtualenv + other dependencies (it's too big to put all on git) then use this command:
 `virtualenv --no-site-packages --distribute .env && source .env/bin/activate && pip install -r requirements.txt`
 
 To start virtualenv, use this:
 
-`$ cd targetDirectory
+```
+$ cd targetDirectory
+$ source ./bin/activate 
+```
 
-$ source ./bin/activate `
+2. The wfdb software package is required to run any python scripts that extract information from Physionet datasets. This is a standalone command line package, MATLAB package or Python package.
 
-
-# TODO:
-Stuff to help improve accuracy:
-- Learn what batch_size does
-- Different layers
-- Different neurons
-- Different cost function settings (optimiser)
-- Different activation functions other then relu
-- Using all data (time domain, non-linear and frequency domain)
-
-- K-fold cross validation to ensure accuracy
-
-# COMPSYS700: Setup
-
-The wfdb software package is required to run any python scripts that extract information from Physionet datasets. This is a standalone command line package, MATLAB package or Python package.
-
-To easily download the datasets provided in this repo for yourself, use
+3. To easily download the datasets provided in this repo for yourself, use
 `rsync`:
  
  `rsync -Cavz physionet.org::nameOfDb /directory`, where nameOfDb substitutes the desired database and /directory is the absolute path of where you want to save it.
