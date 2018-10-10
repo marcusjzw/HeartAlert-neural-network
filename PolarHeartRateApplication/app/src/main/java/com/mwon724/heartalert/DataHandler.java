@@ -79,7 +79,7 @@ public class DataHandler extends Observable{
 		this.H7=H7;
 	}
 	public void setSpoofer(boolean bool) { spoofer = bool;}
-	public boolean getSpooferStatus() { return spoofer;}
+	public boolean getDeviceStatus() { return spoofer;}
 	public H7ConnectThread getH7(){
 		return H7;
 	}

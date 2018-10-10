@@ -2,7 +2,6 @@ package com.mwon724.heartalert;
 
 import java.util.List;
 import java.util.UUID;
-import java.util.logging.Logger;
 
 import android.annotation.SuppressLint;
 import android.bluetooth.BluetoothDevice;
@@ -11,7 +10,6 @@ import android.bluetooth.BluetoothGattCallback;
 import android.bluetooth.BluetoothGattCharacteristic;
 import android.bluetooth.BluetoothGattDescriptor;
 import android.bluetooth.BluetoothGattService;
-import android.provider.ContactsContract;
 import android.util.Log;
 
 import static android.content.ContentValues.TAG;
@@ -57,7 +55,7 @@ public class H7ConnectThread  extends Thread{
 			Integer[] intervals = extractRRInterval(characteristic);
 			int bpm = extractBPM(characteristic);
 			Log.d("H7ConnectThread", "onCharacteristicChanged, Received BPM: " + String.valueOf(bpm));
-			if (DataHandler.getInstance().getSpooferStatus() == true) {
+			if (DataHandler.getInstance().getDeviceStatus() == true) {
 				Log.d(TAG, "onCharacteristicChanged: spoof true, clean input from BPM instead of RRI");
 				DataHandler.getInstance().cleanInput(bpm);
 				Log.d("H7ConnectThread", "onCharacteristicChanged, Received RR:" +  bpm);
@@ -117,8 +115,9 @@ public class H7ConnectThread  extends Thread{
 	};
 
 	private int extractBPM(BluetoothGattCharacteristic characteristic) {
-		int flag = characteristic.getProperties();
+		int flag = characteristic.getIntValue(BluetoothGattCharacteristic.FORMAT_UINT8, 0);
 		int format = -1;
+		Log.d(TAG, "STARTING BYTE FLAG FORMAT (READ THIS IN BINARY) " + String.valueOf(flag));
 		if ((flag & 0x01) != 0) {
 			format = BluetoothGattCharacteristic.FORMAT_UINT16;
 			Log.d(TAG, "Heart rate format UINT16.");
@@ -135,7 +134,7 @@ public class H7ConnectThread  extends Thread{
 		int flag = characteristic.getIntValue(BluetoothGattCharacteristic.FORMAT_UINT8, 0);
 		int format = -1;
 		int energy = -1;
-		int offset = 1; // This depends on hear rate value format and if there is energy data
+		int offset = 1; // This depends on heart rate value format and if there is energy data
 		int rr_count = 0;
 
 		if ((flag & 0x01) != 0) {

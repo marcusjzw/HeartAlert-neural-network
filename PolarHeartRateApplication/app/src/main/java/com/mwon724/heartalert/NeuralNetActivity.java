@@ -2,8 +2,13 @@ package com.mwon724.heartalert;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.TimingLogger;
@@ -49,6 +54,7 @@ public class NeuralNetActivity extends Activity{
         // 1. convert to VLF, LF, HF, LF/HF....
         float[] hrvParameterArray = {0, 0, 0, 0};
         List<HRVParameter> hrvParameterList = freqParamCalculation(rriIntArray);
+        hrvParameterList.get(2).setValue(hrvParameterList.get(2).getValue()/10000);
         for (int i = 0; i < 4; i++) {
             BigDecimal bd = new BigDecimal(hrvParameterList.get(i).getValue());
             rriValuesReceived.append("\n"+hrvParameterList.get(i).getName()+": " +
@@ -62,13 +68,54 @@ public class NeuralNetActivity extends Activity{
         inferenceInterface.run(new String[] {OUTPUT_NODE});
         inferenceInterface.fetch(OUTPUT_NODE, classifierResult);
         String labelResult;
-        if (classifierResult[0] == 1) {
-            labelResult = "The onset of ventricular tachycardia has been detected. Call emergency services?";
+        if (classifierResult[0] == 1 || DataHandler.getInstance().getDeviceStatus()) {
+            AlertDialog.Builder builder;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                builder = new AlertDialog.Builder(NeuralNetActivity.this, android.R.style.Theme_Material_Dialog_Alert);
+            } else {
+                builder = new AlertDialog.Builder(NeuralNetActivity.this);
+            }
+            builder.setTitle("Ventricular Tachycardia Detected!")
+                    .setMessage("Do you want to call emergency services?")
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            // call emergency services. This is placeholder
+                            try {
+                                Intent intent = new Intent(Intent.ACTION_CALL);
+                                intent.setData(Uri.parse("tel:123456789"));
+                                startActivity(intent);
+                            } catch (SecurityException e) {
+                                // do nothing
+                            }
+                        }
+                    })
+                    .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            // do nothing
+                        }
+                    })
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .show();
+            labelResult = "The onset of ventricular tachycardia has been detected. Call emergency services!!";
         }
         else {
+            AlertDialog.Builder builder;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                builder = new AlertDialog.Builder(NeuralNetActivity.this, android.R.style.Theme_Material_Dialog_Alert);
+            } else {
+                builder = new AlertDialog.Builder(NeuralNetActivity.this);
+            }
+            builder.setTitle("Normal condition detected.")
+                    .setMessage("You're fine!")
+                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            // continue with delete
+                        }
+                    })
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .show();
             labelResult = "No anomalies detected.\n";
         }
-        rriValuesReceived.append("\n\n\n\nRESULT: " + labelResult);
         timings.addSplit("finished NN predict");
         timings.dumpToLog();
     }
@@ -87,5 +134,6 @@ public class NeuralNetActivity extends Activity{
 
         return facade.calculateParameters();
     }
+
 
 }

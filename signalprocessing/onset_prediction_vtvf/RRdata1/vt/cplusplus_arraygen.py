@@ -1,9 +1,16 @@
+import os
 filename = '77_.txt'
-codesnippet = 'static uint8_t rriValues = {'
-for line in file('/Users/Marcus/git/compsys700-new/signalprocessing/onset_prediction_vtvf/RRdata1/vt/'+filename): # CHANGE THIS FILE IF WANT TO RUN
-    codesnippet += line.rstrip() + ','
+numberOfValues = 0;
+codesnippet = 'static uint16_t rriValues[100] = {'
+for line in file(os.path.dirname(os.path.abspath(__file__)) + '\\'+filename): # change the \\ to / if running on Linux instead of Windows
+    if (numberOfValues < 100):
+        codesnippet += line.rstrip() + ','
+        numberOfValues += 1
+    else:
+        break
 
 codesnippet = codesnippet[:-1] # remove ending comma
-codesnippet += '}'
+codesnippet += '};'
 print(codesnippet)
+print("Number of Values in this file: " + str(numberOfValues))
 
