@@ -7,7 +7,7 @@ except:
     print('File name not found!')
 numberOfValues = 0;
 codesnippet = 'static uint16_t rriValues[100] = {'
-for line in file(os.path.dirname(os.path.abspath(__file__)) + '/'+filename): # change the \\ to / if running on Linux instead of Windows
+for line in file(os.path.dirname(os.path.abspath(__file__)) + '/'+filename): # change the / to \\ if running on Windows instead of UNIX
     if (numberOfValues < 100):
         codesnippet += line.rstrip() + ','
         numberOfValues += 1
