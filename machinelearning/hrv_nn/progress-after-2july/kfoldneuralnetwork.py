@@ -9,6 +9,7 @@ for hidden_layer_neurons in range(10, 25):
     # BEST SO FAR: 12, 9
     # load dataset
     dataset = numpy.loadtxt("all_data_onsets.csv", delimiter = ",")
+    neuron_difference = 3 # change this depending on how much difference you want between 1st and 2nd hidden layer
 
     # split into input and output variables from splicing csv data
     inputs = dataset[:,1:5] # take the 4 input params (element 1 to 4)
@@ -22,7 +23,7 @@ for hidden_layer_neurons in range(10, 25):
         model = Sequential() # defining layers left to right (input, hidden, output)
         # 'dense' = every neuron is connected to every other neuron in the next layer
         model.add(Dense(hidden_layer_neurons, input_dim=4, activation='relu')) # 4 input dimensions
-        model.add(Dense(hidden_layer_neurons-3, activation='relu'))
+        model.add(Dense(hidden_layer_neurons - neuron_difference, activation='relu'))
         # relu = squishing weights in between the 0 to 1 domain and passing to next layer. other methods: sigmoid, tanh
         model.add(Dense(1, activation='sigmoid')) # output layer, sigmoid for optimal shape to get 'definite' answer
 
@@ -35,7 +36,7 @@ for hidden_layer_neurons in range(10, 25):
         # adam = method for gradient descent, adam is an effective approximation
 
         # call function to fit to the data (Training the network)
-        model.fit(inputs[train], outputs[train], epochs = 100, batch_size=25)
+        model.fit(inputs[train], outputs[train], epochs = 300, batch_size=25)
         print("Neurons: %s", hidden_layer_neurons)
         # evaluation of model
         scores = model.evaluate(inputs[test], outputs[test])
@@ -43,7 +44,7 @@ for hidden_layer_neurons in range(10, 25):
         cvscores.append(scores[1]*100)
 
     print("%.2f%% (+/- %.2f%%)" % (numpy.mean(cvscores), numpy.std(cvscores)))
-    with open("heatmapoutput_kfoldandhiddenlayer.txt", "a+") as text_file:
+    with open("heatmap4fold(n-" + str(neuron_difference) + ").txt", "a+") as text_file:
         text_file.write("\nHidden neurons: %s \nAccuracy:  %.2f%% \nSD: %.2f%%" % (hidden_layer_neurons,
         numpy.mean(cvscores), numpy.std(cvscores)))
 
