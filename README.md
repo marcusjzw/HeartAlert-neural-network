@@ -1,4 +1,4 @@
-# COMPSYS700: Introdution
+# COMPSYS700: Introduction
 This is project #97 of the 2018 University of Auckland ECE Part IV projects. The intent of this research is
 to provide an automated emergency callout system for heart disease patients in life threatening events. 
 
